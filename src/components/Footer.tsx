@@ -3,7 +3,6 @@ import Link from "next/link";
 const categorias = [
   { label: "Segurança no Trânsito", href: "/categoria/seguranca" },
   { label: "Prevenção de Acidentes", href: "/categoria/prevencao" },
-  { label: "Conscientização", href: "/categoria/conscientizacao" },
   { label: "Podcast Na Pista", href: "/categoria/podcast" },
   { label: "Missão Maio Amarelo", href: "/missao" },
 ];
@@ -11,12 +10,8 @@ const categorias = [
 const linksEmpresa = [
   { label: "fretadao.com.br", href: "https://www.fretadao.com.br" },
   {
-    label: "Mobilidade Corporativa",
-    href: "https://www.fretadao.com.br/mobilidade-corporativa",
-  },
-  {
-    label: "Trabalhe Conosco",
-    href: "https://www.fretadao.com.br/trabalhe-conosco",
+    label: "Entre em Contato",
+    href: "https://www.fretadao.com.br/contato/",
   },
 ];
 
@@ -175,9 +170,8 @@ export default function Footer() {
                   maxWidth: "300px",
                 }}
               >
-                Motoristas que transportam vidas — seja um ônibus cheio de
-                colaboradores ou sua família. Iniciativa Fretadão pelo Maio
-                Amarelo 2026.
+                Iniciativa realizada pelo Fretadão para a campanha Maio Amarelo
+                2026.
               </p>
 
               <div style={{ display: "flex", gap: "10px" }}>
@@ -271,7 +265,7 @@ export default function Footer() {
             }}
           >
             <span style={{ color: "var(--text-faint)", fontSize: "0.8rem" }}>
-              © 2026 Fretadão Na Pista. Todos os direitos reservados.
+              © 2026 Fretadão. Todos os direitos reservados.
             </span>
             <span style={{ color: "var(--text-faint)", fontSize: "0.8rem" }}>
               Maio Amarelo 2026 · No trânsito, toda escolha salva vidas.

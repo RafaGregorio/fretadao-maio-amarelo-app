@@ -5,11 +5,9 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
-  { label: "Blog", href: "/" },
   { label: "Segurança no Trânsito", href: "/categoria/seguranca" },
   { label: "Prevenção de Acidentes", href: "/categoria/prevencao" },
-  { label: "Conscientização", href: "/categoria/conscientizacao" },
-  { label: "Podcast Na Pista", href: "/categoria/podcast" },
+  { label: "Fretadão Podcast", href: "/categoria/podcast" },
 ];
 
 export default function Navbar() {

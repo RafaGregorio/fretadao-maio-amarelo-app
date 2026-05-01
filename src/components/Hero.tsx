@@ -99,7 +99,7 @@ export default function Hero() {
         }}
       >
         <Image
-          src="/imagem_fretadao.png"
+          src="/heroImage.png"
           alt="Motorista Fretadão"
           fill
           style={{ objectFit: "cover", objectPosition: "center" }}
@@ -131,22 +131,23 @@ export default function Hero() {
               fontWeight: 700,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "var(--accent)",
+              color: "var(--text-primary)",
               marginBottom: "20px",
             }}
           >
             Conscientização
           </span>
 
-          <h1 className="hero-title" style={{ maxWidth: "680px" }}>
-            Quem dirige transporta vidas: a responsabilidade no volante, do
-            motorista de fretamento ao colaborador no carro próprio
+          <h1 className="hero-title" style={{ maxWidth: "750px" }}>
+            Dirigir é mais do que conduzir um veículo, <br />é carregar vidas
+            com responsabilidade, seja no fretamento ou no carro próprio.
           </h1>
 
-          <p className="hero-subtitle">
-            Neste Maio Amarelo 2026, o Fretadão reforça que dirigir é
-            transportar vidas, seja em um ônibus de fretamento ou no carro
-            próprio. Comportamento consciente, atenção e...
+          <p className="hero-subtitle" style={{ maxWidth: "750px " }}>
+            Neste Maio Amarelo 2026, o Fretadão reforça: dirigir é um
+            compromisso com a vida. Seja no fretado ou no carro próprio, cada
+            atitude no trânsito faz a diferença. Atenção, prudência e empatia
+            garantem que todos cheguem em casa com segurança.
           </p>
 
           <Link href="/missao" className="btn-missao-hero">

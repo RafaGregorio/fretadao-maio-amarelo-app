@@ -19,7 +19,7 @@ export default function PodcastSection() {
           gap: 8px;
         }
         .podcast-cta-btn:hover {
-          background-color: var(--accentH);
+          background-color: #1a9080;
         }
         .podcast-cta-btn:hover .podcast-arrow {
           transform: translateX(6px);
@@ -33,7 +33,7 @@ export default function PodcastSection() {
       <section
         style={{
           backgroundColor: "var(--bg-primary)",
-          padding: "96px 24px",
+          padding: "64px 24px",
           transition: "background-color 0.3s ease",
         }}
       >
@@ -73,7 +73,7 @@ export default function PodcastSection() {
           <Link href="/podcast" className="podcast-cta-btn">
             <span
               style={{
-                color: "var(--text-primary)",
+                color: "rgba(255,255,255,0.75)",
                 fontSize: "0.7rem",
                 fontWeight: 700,
                 letterSpacing: "0.14em",
@@ -85,7 +85,7 @@ export default function PodcastSection() {
 
             <span
               style={{
-                color: "var(--text-primary)",
+                color: "#ffffff",
                 fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
                 fontWeight: 800,
                 lineHeight: 1.15,
@@ -97,7 +97,7 @@ export default function PodcastSection() {
 
             <span
               style={{
-                color: "var(--text-primary)",
+                color: "rgba(255,255,255,0.8)",
                 fontSize: "0.9rem",
                 marginTop: "4px",
               }}
@@ -112,12 +112,12 @@ export default function PodcastSection() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                color: "var(--text-primary)",
+                color: "#ffffff",
                 fontSize: "0.8rem",
                 fontWeight: 700,
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",
-                borderBottom: "1.5px solid var(--text-primary)",
+                borderBottom: "1.5px solid rgba(255,255,255,0.5)",
                 paddingBottom: "2px",
               }}
             >
