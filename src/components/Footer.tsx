@@ -3,7 +3,7 @@ import Link from "next/link";
 const categorias = [
   { label: "Segurança no Trânsito", href: "/categoria/seguranca" },
   { label: "Prevenção de Acidentes", href: "/categoria/prevencao" },
-  { label: "Podcast Na Pista", href: "/categoria/podcast" },
+  { label: "Fretadão Podcast", href: "/categoria/podcast" },
   { label: "Missão Maio Amarelo", href: "/missao" },
 ];
 

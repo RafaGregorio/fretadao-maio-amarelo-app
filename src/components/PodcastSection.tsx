@@ -70,7 +70,7 @@ export default function PodcastSection() {
           </div>
 
           {/* 75% — Botão CTA */}
-          <Link href="/podcast" className="podcast-cta-btn">
+          <Link href="/categoria/podcast" className="podcast-cta-btn">
             <span
               style={{
                 color: "rgba(255,255,255,0.75)",

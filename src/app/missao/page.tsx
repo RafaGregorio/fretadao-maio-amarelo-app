@@ -2,30 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
-// import Navbar from "@/components/Navbar";
+import { useRouter } from "next/navigation";
 
 export default function MissaoPage() {
+  const router = useRouter();
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [area, setArea] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [emailError, setEmailError] = useState(false);
 
-  const emailValido =
-    email.endsWith("@fretadao.com") && email.length > "@fretadao.com".length;
-  const formValido = nome.trim() !== "" && emailValido && area.trim() !== "";
-
-  const handleEmailBlur = () => {
-    if (email && !emailValido) {
-      setEmailError("Apenas e-mails @fretadao.com são permitidos.");
-    } else {
-      setEmailError("");
-    }
+  const validarEmail = (email: string): boolean => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    if (emailError) setEmailError("");
-  };
+  const formValido =
+    nome.trim() !== "" && email.trim() !== "" && area.trim() !== "";
 
   return (
     <>
@@ -215,10 +208,10 @@ export default function MissaoPage() {
           >
             {/* Nome */}
             <div>
-              <label className="missao-label">Nome Completo</label>
+              <label className="missao-label">Nome</label>
               <input
                 type="text"
-                placeholder="Seu nome completo"
+                placeholder="Seu nome"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 className="missao-input"
@@ -227,21 +220,24 @@ export default function MissaoPage() {
 
             {/* Email */}
             <div>
-              <label className="missao-label">E-mail Corporativo</label>
+              <label className="missao-label">E-mail</label>
               <input
                 type="email"
-                placeholder="voce@fretadao.com.br"
+                placeholder="voce@email.com.br"
                 value={email}
-                onChange={handleEmailChange}
-                onBlur={handleEmailBlur}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setEmail(value);
+                  setEmailError(!validarEmail(value));
+                }}
                 className={`missao-input ${emailError ? "error" : ""}`}
               />
-              {emailError && <span className="error-msg">{emailError}</span>}
+              {emailError && <span className="error-msg">E-mail inválido</span>}
             </div>
 
             {/* Área */}
             <div>
-              <label className="missao-label">Área / Função</label>
+              <label className="missao-label">Cargo</label>
               <input
                 type="text"
                 placeholder="Motorista · Técnico · Administrativo · Comercial..."
@@ -252,7 +248,15 @@ export default function MissaoPage() {
             </div>
 
             {/* Botão */}
-            <button className="btn-missao-submit" disabled={!formValido}>
+            <button
+              className="btn-missao-submit"
+              disabled={!formValido}
+              onClick={() =>
+                router.push(
+                  `/quiz?nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&area=${encodeURIComponent(area)}`,
+                )
+              }
+            >
               Entrar na Missão →
             </button>
           </div>

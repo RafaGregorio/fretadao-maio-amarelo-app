@@ -12,7 +12,7 @@ export default function Hero() {
           font-weight: 800;
           color: #ffffff;
           line-height: 1.1;
-          margin: 0 0 16px 0;
+          margin: 0 0 24px 0;
           transition: color 0.3s ease;
           cursor: default;
         }
@@ -124,23 +124,9 @@ export default function Hero() {
             width: "100%",
           }}
         >
-          <span
-            style={{
-              display: "inline-block",
-              fontSize: "0.7rem",
-              fontWeight: 700,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--text-primary)",
-              marginBottom: "20px",
-            }}
-          >
-            Conscientização
-          </span>
-
           <h1 className="hero-title" style={{ maxWidth: "750px" }}>
             Dirigir é mais do que conduzir um veículo, <br />é carregar vidas
-            com responsabilidade, seja no fretamento ou no carro próprio.
+            com responsabilidade.
           </h1>
 
           <p className="hero-subtitle" style={{ maxWidth: "750px " }}>
@@ -184,7 +170,11 @@ export default function Hero() {
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-              24 de abril de 2026
+              {new Date().toLocaleDateString("pt-BR", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
             </span>
             <Link href="/podcast" className="btn-ouvir">
               <span
