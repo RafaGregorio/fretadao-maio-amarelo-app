@@ -62,6 +62,7 @@ export default function PodcastSection() {
               src="/podcastHost.png"
               alt="Host do Podcast Na Pista"
               fill
+              sizes="25vw"
               style={{
                 objectFit: "cover",
                 objectPosition: "center top",
