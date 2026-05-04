@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { perguntas } from "@/data/perguntas";
-import { addParticipante } from "@/store/quizStore";
 
 const TEMPO_POR_PERGUNTA = 30;
 const PONTOS_POR_ACERTO = 500;
@@ -26,54 +25,65 @@ export default function QuizPage() {
 
   const pergunta = perguntas[atual];
   const progresso = (atual / perguntas.length) * 100;
-  const circumference = 2 * Math.PI * 40; // raio 40
+  const circumference = 2 * Math.PI * 40;
 
-  const avancar = useCallback(() => {
-    if (atual + 1 >= perguntas.length) {
-      const totalPontos =
-        pontos + (status === "correta" ? PONTOS_POR_ACERTO : 0);
-      const totalAcertos = acertos + (status === "correta" ? 1 : 0);
-      addParticipante({
-        nome,
-        email,
-        area,
-        pontos: totalPontos,
-        acertos: totalAcertos,
-        data: new Date().toISOString().split("T")[0],
-      });
-      router.push(
-        `/ranking?pontos=${totalPontos}&acertos=${totalAcertos}&nome=${encodeURIComponent(nome)}`,
-      );
-    } else {
-      setAtual((a) => a + 1);
-      setTempo(TEMPO_POR_PERGUNTA);
-      setRespondida(null);
-      setStatus("aguardando");
-    }
-  }, [atual, pontos, acertos, status, nome, email, area, router]);
+  const avancar = useCallback(
+    async (pontosFinais: number, acertosFinais: number) => {
+      const isUltima = atual + 1 >= perguntas.length;
+
+      if (isUltima) {
+        await fetch("/api/ranking", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nome,
+            email,
+            area,
+            pontos: pontosFinais,
+            acertos: acertosFinais,
+          }),
+        });
+        router.push(
+          `/ranking?pontos=${pontosFinais}&acertos=${acertosFinais}&nome=${encodeURIComponent(nome)}`,
+        );
+      } else {
+        setAtual((a) => a + 1);
+        setTempo(TEMPO_POR_PERGUNTA);
+        setRespondida(null);
+        setStatus("aguardando");
+      }
+    },
+    [atual, nome, email, area, router],
+  );
 
   // Cronômetro
   useEffect(() => {
     if (respondida !== null) return;
     if (tempo === 0) {
       setStatus("tempo");
-      setTimeout(avancar, 1500);
+      setTimeout(() => avancar(pontos, acertos), 1500);
       return;
     }
     const t = setTimeout(() => setTempo((v) => v - 1), 1000);
     return () => clearTimeout(t);
-  }, [tempo, respondida, avancar]);
+  }, [tempo, respondida, avancar, pontos, acertos]);
 
   const responder = (idx: number) => {
     if (respondida !== null) return;
     setRespondida(idx);
     const correta = idx === pergunta.correta;
-    setStatus(correta ? "correta" : "errada");
+    const novoStatus = correta ? "correta" : "errada";
+    setStatus(novoStatus);
+
+    const novosPontos = correta ? pontos + PONTOS_POR_ACERTO : pontos;
+    const novosAcertos = correta ? acertos + 1 : acertos;
+
     if (correta) {
-      setPontos((p) => p + PONTOS_POR_ACERTO);
-      setAcertos((a) => a + 1);
+      setPontos(novosPontos);
+      setAcertos(novosAcertos);
     }
-    setTimeout(avancar, 1800);
+
+    setTimeout(() => avancar(novosPontos, novosAcertos), 1800);
   };
 
   const timerColor =

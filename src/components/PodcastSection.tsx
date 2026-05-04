@@ -103,8 +103,7 @@ export default function PodcastSection() {
                 marginTop: "4px",
               }}
             >
-              Gil e Bia falam sobre segurança no trânsito — pra quem dirige a
-              trabalho e pra quem usa o carro todo dia.
+              Para quem dirige a trabalho e para quem usa o carro todo dia.
             </span>
 
             <span
