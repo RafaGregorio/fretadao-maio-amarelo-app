@@ -4,16 +4,15 @@ import { getRanking } from "@/store/quizStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
-export default function RankingPage({
-  searchParams,
-}: {
-  searchParams: { pontos?: string; acertos?: string; nome?: string };
-}) {
+export default function RankingPage() {
+  const params = useSearchParams();
+  const pontos = Number(params.get("pontos") ?? 0);
+  const acertos = Number(params.get("acertos") ?? 0);
+  const nome = params.get("nome") ?? "";
+
   const ranking = getRanking();
-  const pontos = Number(searchParams.pontos ?? 0);
-  const acertos = Number(searchParams.acertos ?? 0);
-  const nome = searchParams.nome ?? "";
 
   const medalhas = ["🥇", "🥈", "🥉", "4º", "5º"];
   const medalhaColors = [
