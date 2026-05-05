@@ -15,7 +15,7 @@ export default function Hero() {
       `}</style>
 
       <section className="relative w-full min-h-[80vh] md:min-h-screen flex items-center overflow-hidden bg-[#111111]">
-        {/* Imagem de fundo */}
+        {/* Image */}
         <Image
           src="/heroImage.png"
           alt="Motorista Fretadão"
@@ -35,7 +35,6 @@ export default function Hero() {
 
         {/* Conteúdo */}
         <div className="relative z-[2] w-full max-w-[1280px] mx-auto px-6 py-16 md:py-20">
-          {/* Título */}
           <h1
             className="text-white font-extrabold leading-tight mb-6 transition-colors duration-300 cursor-default hover:text-[var(--accent)] max-w-[750px]"
             style={{ fontSize: "clamp(2rem, 5vw, 3.75rem)" }}
@@ -45,7 +44,6 @@ export default function Hero() {
             responsabilidade.
           </h1>
 
-          {/* Subtítulo */}
           <p
             className="text-white/55 leading-relaxed max-w-[680px]"
             style={{ fontSize: "clamp(0.95rem, 2vw, 1.125rem)" }}
@@ -56,7 +54,6 @@ export default function Hero() {
             garantem que todos cheguem em casa com segurança.
           </p>
 
-          {/* Botão missão */}
           <Link
             href="/missao"
             className="mt-9 inline-flex items-center gap-2 px-5 py-2.5 border border-[#eab308] rounded-full bg-[rgba(234,179,8,0.12)] text-[#eab308] text-xs font-bold tracking-widest uppercase no-underline transition-all duration-200 hover:bg-[rgba(234,179,8,0.28)] hover:text-[#fde047]"
@@ -77,7 +74,6 @@ export default function Hero() {
             </svg>
           </Link>
 
-          {/* Data + ouvir */}
           <div className="flex flex-wrap items-center gap-4 mt-7">
             <span className="flex items-center gap-1.5 text-white/40 text-sm">
               <svg

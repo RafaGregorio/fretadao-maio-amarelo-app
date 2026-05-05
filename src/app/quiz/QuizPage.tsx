@@ -195,7 +195,6 @@ export default function QuizPage() {
             </div>
           </div>
 
-          {/* Cronômetro circular */}
           <div
             style={{
               display: "flex",
@@ -267,7 +266,6 @@ export default function QuizPage() {
             </div>
           </div>
 
-          {/* Pergunta */}
           <h2
             style={{
               color: "var(--text-primary)",
@@ -281,7 +279,6 @@ export default function QuizPage() {
             {pergunta.texto}
           </h2>
 
-          {/* Alternativas */}
           <div
             style={{ display: "flex", flexDirection: "column", gap: "12px" }}
           >
@@ -302,7 +299,6 @@ export default function QuizPage() {
             ))}
           </div>
 
-          {/* Feedback */}
           {status !== "aguardando" && (
             <div
               style={{

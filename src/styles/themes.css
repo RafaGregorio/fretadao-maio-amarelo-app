@@ -25,7 +25,6 @@
   --accentH: #fde047;
 }
 
-/* Aplicar nas tags principais */
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);

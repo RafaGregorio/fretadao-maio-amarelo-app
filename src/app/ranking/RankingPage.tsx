@@ -88,7 +88,7 @@ export default function RankingPage() {
             padding: "72px 24px 96px",
           }}
         >
-          {/* Resultado do participante */}
+          {/* Resultado */}
           {nome && (
             <div className="result-badge">
               <span
@@ -279,7 +279,6 @@ export default function RankingPage() {
             ))
           )}
 
-          {/* Voltar */}
           <div style={{ textAlign: "center", marginTop: "48px" }}>
             <Link
               href="/"

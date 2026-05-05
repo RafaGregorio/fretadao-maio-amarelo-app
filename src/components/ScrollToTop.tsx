@@ -21,7 +21,7 @@ export default function ScrollToTop() {
         const animate = (currentTime: number) => {
           const elapsed = currentTime - startTime;
           const progress = Math.min(elapsed / duration, 1);
-          // easing: desacelera no final
+
           const ease = 1 - Math.pow(1 - progress, 4);
           window.scrollTo(0, start * (1 - ease));
           if (progress < 1) requestAnimationFrame(animate);

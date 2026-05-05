@@ -145,7 +145,6 @@ export default function PodcastPage() {
 
       <main className="min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
         <div className="max-w-[860px] mx-auto px-4 sm:px-6 py-16 sm:py-20 pb-20 sm:pb-24 flex flex-col items-center">
-
           {/* Título */}
           <div className="flex items-center gap-3 sm:gap-4 mb-4">
             <span className="mic-icon text-[var(--accent)]">
@@ -178,7 +177,6 @@ export default function PodcastPage() {
 
           {/* Card player */}
           <div className="w-full bg-[var(--bg-secondary)] border border-[var(--border)] rounded-2xl p-5 sm:p-8 md:p-10">
-
             {/* Info do episódio */}
             <div className="flex items-start gap-4 mb-8">
               {/* Ícone do episódio */}
@@ -201,7 +199,6 @@ export default function PodcastPage() {
                 </svg>
               </div>
 
-              {/* Texto do episódio */}
               <div className="flex-1 min-w-0">
                 <div className="inline-flex items-center gap-1.5 bg-[rgba(34,175,158,0.12)] border border-[rgba(34,175,158,0.25)] text-[var(--accent)] text-[0.6rem] sm:text-[0.65rem] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full mb-2">
                   Ep. 01 · Maio Amarelo 2026
@@ -214,7 +211,6 @@ export default function PodcastPage() {
                 </p>
               </div>
 
-              {/* Ondas animadas — ocultas em telas muito pequenas */}
               <div className="hidden xs:flex sm:flex items-end gap-[3px] h-7 shrink-0">
                 {[18, 24, 20, 28, 16].map((h, i) => (
                   <div
@@ -226,7 +222,6 @@ export default function PodcastPage() {
               </div>
             </div>
 
-            {/* Barra de progresso */}
             <div
               ref={progressBarRef}
               className="w-full h-[5px] bg-[var(--bg-hover)] rounded-full cursor-pointer relative"
@@ -238,7 +233,6 @@ export default function PodcastPage() {
               />
             </div>
 
-            {/* Tempo */}
             <div className="flex justify-between mt-2 mb-6 sm:mb-7">
               <span className="text-[var(--text-faint)] text-xs font-mono">
                 {formatTime(currentTime)}
@@ -248,10 +242,8 @@ export default function PodcastPage() {
               </span>
             </div>
 
-            {/* Controles: volume | play | volume */}
+            {/* Controles: volume | play  */}
             <div className="flex items-center justify-between gap-3">
-
-              {/* Controle de volume — esquerda */}
               <div className="flex items-center gap-2 w-[110px] sm:w-[130px]">
                 <button
                   onClick={toggleMute}
@@ -301,7 +293,6 @@ export default function PodcastPage() {
                 />
               </div>
 
-              {/* Botão Play/Pause — centro */}
               <button
                 onClick={togglePlay}
                 aria-label={playing ? "Pausar" : "Reproduzir"}
@@ -309,7 +300,13 @@ export default function PodcastPage() {
               >
                 {playing ? (
                   <>
-                    <svg width="14" height="14" className="sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <svg
+                      width="14"
+                      height="14"
+                      className="sm:w-4 sm:h-4"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
                       <rect x="6" y="4" width="4" height="16" />
                       <rect x="14" y="4" width="4" height="16" />
                     </svg>
@@ -317,7 +314,13 @@ export default function PodcastPage() {
                   </>
                 ) : (
                   <>
-                    <svg width="14" height="14" className="sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <svg
+                      width="14"
+                      height="14"
+                      className="sm:w-4 sm:h-4"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
                       <polygon points="5 3 19 12 5 21 5 3" />
                     </svg>
                     Reproduzir
@@ -325,7 +328,6 @@ export default function PodcastPage() {
                 )}
               </button>
 
-              {/* Espaço direito para simetria */}
               <div className="w-[110px] sm:w-[130px]" />
             </div>
           </div>

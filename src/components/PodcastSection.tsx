@@ -6,7 +6,6 @@ export default function PodcastSection() {
     <>
       <section className="bg-[var(--bg-primary)] px-6 py-16 transition-colors duration-300">
         <div className="max-w-[1280px] mx-auto rounded-2xl overflow-hidden border border-[var(--border)] flex flex-col md:flex-row md:h-[260px]">
-          {/* Imagem */}
           <div className="relative w-full h-[200px] md:w-[25%] md:h-full bg-[#111111] shrink-0 overflow-hidden">
             <Image
               src="/podcastHost.png"
@@ -17,7 +16,6 @@ export default function PodcastSection() {
             />
           </div>
 
-          {/* CTA */}
           <Link
             href="/categoria/podcast"
             className="group flex flex-col justify-center flex-1 px-8 py-10 md:px-12 md:py-0 bg-[var(--accent)] no-underline transition-colors duration-200 hover:bg-[var(--accentH)] gap-2"
@@ -36,7 +34,6 @@ export default function PodcastSection() {
         </div>
       </section>
 
-      {/* Divisor */}
       <div className="h-px bg-[var(--border)] max-w-[1280px] mx-auto" />
     </>
   );

@@ -73,8 +73,6 @@ export default function PrevencaoPage() {
 
       <main className="min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
         <div className="max-w-[1280px] mx-auto">
-
-          {/* Header */}
           <div className="px-4 sm:px-6 pt-14 sm:pt-16 pb-12 sm:pb-16">
             <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
               07 — O Que Você Pode Fazer
@@ -92,7 +90,6 @@ export default function PrevencaoPage() {
             </p>
           </div>
 
-          {/* Grid de dicas */}
           <div className="px-4 sm:px-6 pb-16 sm:pb-20">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[2px]">
               {dicas.map((d) => (
@@ -111,14 +108,15 @@ export default function PrevencaoPage() {
             </div>
           </div>
 
-          {/* Mensagem Final */}
           <div className="bg-[var(--bg-secondary)] border-t border-[var(--border)] px-4 sm:px-6 py-16 sm:py-20 text-center">
             <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
               Mensagem Final
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-8 sm:mb-10">
               VOCÊ{" "}
-              <em className="text-[var(--accent)] not-italic">FAZ A DIFERENÇA</em>
+              <em className="text-[var(--accent)] not-italic">
+                FAZ A DIFERENÇA
+              </em>
             </h2>
 
             <p className="max-w-[600px] mx-auto mb-5 text-sm sm:text-base text-[var(--text-muted)] leading-[1.8]">
@@ -136,7 +134,6 @@ export default function PrevencaoPage() {
               com segurança.
             </p>
 
-            {/* Badge final */}
             <div className="inline-block bg-[#eab308] px-8 sm:px-12 py-6 sm:py-7 rounded-[4px]">
               <div className="text-3xl sm:text-4xl md:text-[clamp(2rem,4vw,3rem)] font-black text-[#1a1a1a] leading-[1.1] tracking-[0.04em]">
                 MAIO AMARELO
@@ -146,7 +143,6 @@ export default function PrevencaoPage() {
               </div>
             </div>
           </div>
-
         </div>
       </main>
 

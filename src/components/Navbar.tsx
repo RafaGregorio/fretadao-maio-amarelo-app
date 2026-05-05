@@ -34,7 +34,6 @@ export default function Navbar() {
       className="sticky z-50 w-full transition-all duration-300 bg-[var(--bg-primary)] border-b border-[var(--border)]"
     >
       <div className="max-w-[1280px] mx-auto px-6 h-[72px] flex items-center justify-between gap-8">
-        {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
           <Image
             src="/logoBranca.png"
@@ -49,7 +48,6 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Links — desktop */}
         <div className="hidden md:flex items-center gap-7 flex-1 justify-center">
           {navLinks.map((link) => (
             <Link
@@ -63,7 +61,6 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA + ThemeToggle — desktop */}
         <div className="hidden md:flex items-center gap-3 shrink-0">
           <Link
             href="/missao"
@@ -87,7 +84,7 @@ export default function Navbar() {
           <ThemeToggle />
         </div>
 
-        {/* Mobile — ThemeToggle + Hambúrguer */}
+        {/* Mobile — Hambúrguer */}
         <div className="flex md:hidden items-center gap-3">
           <ThemeToggle />
           <button
@@ -121,7 +118,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Menu mobile */}
       {menuOpen && (
         <div className="md:hidden bg-[var(--bg-primary)] border-t border-[var(--border)] px-6 pb-6 pt-2">
           {navLinks.map((link) => (

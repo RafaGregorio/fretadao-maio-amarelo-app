@@ -224,17 +224,14 @@ export default function MissaoPage() {
           padding: "64px 24px",
         }}
       >
-        {/* H1 animado */}
         <h1 className="maio-title">Maio Amarelo</h1>
 
-        {/* Card do formulário */}
         <div
           style={{
             width: "100%",
             maxWidth: "480px",
           }}
         >
-          {/* Voltar */}
           <Link href="/" className="voltar-link">
             <svg
               width="16"
@@ -251,7 +248,6 @@ export default function MissaoPage() {
             Voltar
           </Link>
 
-          {/* Label identificação */}
           <span
             style={{
               color: "#eab308",
@@ -266,7 +262,6 @@ export default function MissaoPage() {
             Identificação
           </span>
 
-          {/* Título */}
           <h2
             style={{
               color: "#ffffff",
@@ -291,11 +286,9 @@ export default function MissaoPage() {
             Seu nome e área entram no ranking interno Fretadão.
           </p>
 
-          {/* Campos */}
           <div
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
-            {/* Nome */}
             <div>
               <label className="missao-label">Nome</label>
               <input
@@ -307,7 +300,6 @@ export default function MissaoPage() {
               />
             </div>
 
-            {/* Email */}
             <div>
               <label className="missao-label">E-mail</label>
               <input
@@ -324,7 +316,6 @@ export default function MissaoPage() {
               {emailError && <span className="error-msg">E-mail inválido</span>}
             </div>
 
-            {/* Empresa */}
             <div>
               <label className="missao-label">Empresa</label>
               <select
@@ -341,7 +332,6 @@ export default function MissaoPage() {
               </select>
             </div>
 
-            {/* Botão */}
             <button
               className="btn-missao-submit"
               disabled={!formValido}
