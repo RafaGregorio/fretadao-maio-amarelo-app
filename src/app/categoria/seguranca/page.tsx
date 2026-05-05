@@ -156,8 +156,7 @@ export default function SegurancaPage() {
               🟡 Maio Amarelo — Segurança no Trânsito 2026
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-[clamp(2.5rem,6vw,4.5rem)] font-black text-[var(--text-primary)] leading-[1.05] mb-4">
-              Segurança{" "}
-              <span className="text-[var(--accent)]">no Trânsito</span>
+              Nossas <span className="text-[var(--accent)]">Ocorrências</span>
             </h1>
             <div className="w-12 h-[3px] bg-[var(--accent)] rounded-full my-4" />
             <p className="text-[var(--text-muted)] text-sm sm:text-base max-w-[700px] leading-[1.7] mb-10 sm:mb-12">
@@ -662,8 +661,8 @@ export default function SegurancaPage() {
               06 — Operações
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-6 sm:mb-8">
-              ONDE MAIS{" "}
-              <em className="text-[var(--accent)] not-italic">ACONTECE</em>
+              PRINCIPAIS{" "}
+              <em className="text-[var(--accent)] not-italic">CLIENTES</em>
             </h2>
             <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-5">
               Clientes com mais ocorrências
