@@ -20,6 +20,7 @@ const empresas = [
   "Famatur",
   "Gatti Gold Turismo",
   "Gtz Turismo",
+  "Fretadão",
   "Jc Fretamento",
   "Karoline E Juliano Transportes",
   "Loca Trans",
