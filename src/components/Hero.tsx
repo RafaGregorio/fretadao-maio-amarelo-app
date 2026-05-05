@@ -7,137 +7,61 @@ export default function Hero() {
   return (
     <>
       <style>{`
-        .hero-title {
-          font-size: clamp(2.5rem, 5vw, 3.75rem);
-          font-weight: 800;
-          color: #ffffff;
-          line-height: 1.1;
-          margin: 0 0 24px 0;
-          transition: color 0.3s ease;
-          cursor: default;
-        }
-        .hero-title:hover { color: var(--accent); }
-        .hero-subtitle {
-          font-size: clamp(1rem, 2vw, 1.125rem);
-          color: rgba(255,255,255,0.55);
-          line-height: 1.7;
-          max-width: 540px;
-          margin: 0;
-        }
         @keyframes pulse-dot {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.3; }
         }
-        .btn-missao-hero {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          margin-top: 36px;
-          padding: 10px 20px;
-          border: 1.5px solid #eab308;
-          border-radius: 999px;
-          background-color: rgba(234,179,8,0.12);
-          color: #eab308;
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          text-decoration: none;
-          transition: background-color 0.25s ease, color 0.25s ease;
-        }
-        .btn-missao-hero:hover {
-          background-color: rgba(234,179,8,0.28);
-          color: #fde047;
-        }
-        .btn-missao-hero .dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background-color: #eab308;
-          animation: pulse-dot 1.4s ease-in-out infinite;
-          flex-shrink: 0;
-        }
-        .hero-date-row {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          margin-top: 28px;
-          flex-wrap: wrap;
-        }
-        .hero-date {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          color: rgba(255,255,255,0.4);
-          font-size: 0.8rem;
-        }
-        .btn-ouvir {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 5px 14px;
-          border-radius: 999px;
-          background-color: var(--accent);
-          color: var(--text-primary);
-          font-size: 0.75rem;
-          font-weight: 600;
-          text-decoration: none;
-          transition: background-color 0.2s ease;
-        }
-        .btn-ouvir:hover { background-color: var(--accentH); }
+        .dot-pulse { animation: pulse-dot 1.4s ease-in-out infinite; }
       `}</style>
 
-      <section
-        style={{
-          position: "relative",
-          width: "100%",
-          minHeight: "vh",
-          display: "flex",
-          alignItems: "center",
-          overflow: "hidden",
-          backgroundColor: "#111111",
-        }}
-      >
+      <section className="relative w-full min-h-[80vh] md:min-h-screen flex items-center overflow-hidden bg-[#111111]">
+        {/* Imagem de fundo */}
         <Image
           src="/heroImage.png"
           alt="Motorista Fretadão"
           fill
-          style={{ objectFit: "cover", objectPosition: "center" }}
+          className="object-cover object-center"
           priority
         />
+
+        {/* Overlay */}
         <div
+          className="absolute inset-0 z-[1]"
           style={{
-            position: "absolute",
-            inset: 0,
             background:
-              "linear-gradient(to right, rgba(0,0,0,0.82) 50%, rgba(0,0,0,0.2) 100%)",
-            zIndex: 1,
+              "linear-gradient(to right, rgba(0,0,0,0.88) 60%, rgba(0,0,0,0.2) 100%)",
           }}
         />
-        <div
-          style={{
-            position: "relative",
-            zIndex: 2,
-            maxWidth: "1280px",
-            margin: "0 auto",
-            padding: "80px 24px",
-            width: "100%",
-          }}
-        >
-          <h1 className="hero-title" style={{ maxWidth: "750px" }}>
-            Dirigir é mais do que conduzir um veículo, <br />é carregar vidas
-            com responsabilidade.
+
+        {/* Conteúdo */}
+        <div className="relative z-[2] w-full max-w-[1280px] mx-auto px-6 py-16 md:py-20">
+          {/* Título */}
+          <h1
+            className="text-white font-extrabold leading-tight mb-6 transition-colors duration-300 cursor-default hover:text-[var(--accent)] max-w-[750px]"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.75rem)" }}
+          >
+            Dirigir é mais do que conduzir um veículo,{" "}
+            <br className="hidden md:block" />é carregar vidas com
+            responsabilidade.
           </h1>
 
-          <p className="hero-subtitle" style={{ maxWidth: "750px " }}>
+          {/* Subtítulo */}
+          <p
+            className="text-white/55 leading-relaxed max-w-[680px]"
+            style={{ fontSize: "clamp(0.95rem, 2vw, 1.125rem)" }}
+          >
             Neste Maio Amarelo 2026, o Fretadão reforça: dirigir é um
             compromisso com a vida. Seja no fretado ou no carro próprio, cada
             atitude no trânsito faz a diferença. Atenção, prudência e empatia
             garantem que todos cheguem em casa com segurança.
           </p>
 
-          <Link href="/missao" className="btn-missao-hero">
-            <span className="dot" />
+          {/* Botão missão */}
+          <Link
+            href="/missao"
+            className="mt-9 inline-flex items-center gap-2 px-5 py-2.5 border border-[#eab308] rounded-full bg-[rgba(234,179,8,0.12)] text-[#eab308] text-xs font-bold tracking-widest uppercase no-underline transition-all duration-200 hover:bg-[rgba(234,179,8,0.28)] hover:text-[#fde047]"
+          >
+            <span className="dot-pulse w-[7px] h-[7px] rounded-full bg-[#eab308] shrink-0 inline-block" />
             Missão Maio Amarelo
             <svg
               width="12"
@@ -153,8 +77,9 @@ export default function Hero() {
             </svg>
           </Link>
 
-          <div className="hero-date-row">
-            <span className="hero-date">
+          {/* Data + ouvir */}
+          <div className="flex flex-wrap items-center gap-4 mt-7">
+            <span className="flex items-center gap-1.5 text-white/40 text-sm">
               <svg
                 width="13"
                 height="13"
@@ -176,16 +101,11 @@ export default function Hero() {
                 year: "numeric",
               })}
             </span>
-            <Link href="/podcast" className="btn-ouvir">
-              <span
-                style={{
-                  width: "6px",
-                  height: "6px",
-                  borderRadius: "50%",
-                  backgroundColor: "var(--text-primary)",
-                  display: "inline-block",
-                }}
-              />
+            <Link
+              href="/categoria/podcast"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[var(--accent)] text-white text-xs font-semibold no-underline transition-colors hover:opacity-90"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-white inline-block" />
               Ouvir artigo
             </Link>
           </div>

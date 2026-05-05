@@ -2,7 +2,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { label: "Segurança no Trânsito", href: "/categoria/seguranca" },
@@ -11,6 +13,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { theme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const lastScroll = useRef(0);
@@ -26,197 +29,70 @@ export default function Navbar() {
   }, []);
 
   return (
-    <>
-      <style>{`
-        .nav-link {
-          position: relative;
-          color: var(--text-primary);
-          font-size: 0.75rem;
-          font-weight: 500;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          text-decoration: none;
-          padding-bottom: 4px;
-          transition: color 0.25s ease;
-          white-space: nowrap;
-        }
-
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          right: 50%;
-          height: 1.5px;
-          background-color: var(--accent);
-          transition: left 0.3s ease, right 0.3s ease;
-        }
-
-        .nav-link:hover {
-          color: var(--text-muted);
-        }
-
-        .nav-link:hover::after {
-          left: 0;
-          right: 0;
-        }
-
-        .btn-missao {
-          background-color: #eab308;
-          color: #1a1a1a;
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          padding: 8px 18px;
-          border-radius: 6px;
-          border: none;
-          cursor: pointer;
-          text-decoration: none;
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          transition: background-color 0.25s ease, transform 0.25s ease, border-radius 0.25s ease;
-          white-space: nowrap;
-        }
-
-        .btn-missao:hover {
-          background-color: #fde047;
-          transform: scale(1.06);
-          border-radius: 12px;
-        }
-
-        .mobile-nav-link {
-          color: #9ca3af;
-          font-size: 0.875rem;
-          font-weight: 500;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          text-decoration: none;
-          padding: 12px 0;
-          border-bottom: 1px solid #2a2a2a;
-          display: block;
-          transition: color 0.2s ease;
-        }
-
-        .mobile-nav-link:hover {
-          color: #ffffff;
-        }
-      `}</style>
-
-      <nav
-        style={{
-          backgroundColor: "var(--bg-primary)",
-          borderBottom: "1px solid #2a2a2a",
-          position: "sticky",
-          top: visible ? 0 : "-80px",
-          transition: "top 0.3s ease, background-color 0.3s ease",
-          zIndex: 50,
-          width: "100%",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            padding: "0 24px",
-            height: "82px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "32px",
-          }}
-        >
-          {/* Logo */}
-          <Link
-            href="/"
+    <nav
+      style={{ top: visible ? 0 : "-90px" }}
+      className="sticky z-50 w-full transition-all duration-300 bg-[var(--bg-primary)] border-b border-[var(--border)]"
+    >
+      <div className="max-w-[1280px] mx-auto px-6 h-[72px] flex items-center justify-between gap-8">
+        {/* Logo */}
+        <Link href="/" className="flex items-center shrink-0">
+          <Image
+            src="/logoBranca.png"
+            alt="Fretadão"
+            width={160}
+            height={40}
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              textDecoration: "none",
-              flexShrink: 0,
+              objectFit: "contain",
+              filter: theme === "light" ? "invert(1)" : "none",
             }}
+            priority
+          />
+        </Link>
+
+        {/* Links — desktop */}
+        <div className="hidden md:flex items-center gap-7 flex-1 justify-center">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="relative text-[var(--text-muted)] text-xs font-medium tracking-wide uppercase no-underline pb-1 transition-colors duration-200 hover:text-[var(--text-primary)] group"
+            >
+              {link.label}
+              <span className="absolute bottom-0 left-1/2 right-1/2 h-[1.5px] bg-[var(--accent)] transition-all duration-300 group-hover:left-0 group-hover:right-0" />
+            </Link>
+          ))}
+        </div>
+
+        {/* CTA + ThemeToggle — desktop */}
+        <div className="hidden md:flex items-center gap-3 shrink-0">
+          <Link
+            href="/missao"
+            className="inline-flex items-center gap-1.5 bg-[#eab308] text-[#1a1a1a] text-xs font-bold tracking-wide uppercase px-4 py-2 rounded-md no-underline transition-all duration-200 hover:bg-[#fde047] hover:scale-105 hover:rounded-xl"
           >
             <svg
-              width="28"
-              height="28"
+              width="13"
+              height="13"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="var(--text-primary)"
-              strokeWidth="1.8"
+              stroke="currentColor"
+              strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <rect x="1" y="3" width="15" height="13" rx="2" />
-              <path d="M16 8h4l3 5v3h-7V8z" />
-              <circle cx="5.5" cy="18.5" r="2.5" />
-              <circle cx="18.5" cy="18.5" r="2.5" />
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
             </svg>
-            <span
-              style={{
-                color: "var(--text-primary)",
-                fontSize: "1rem",
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-              }}
-            >
-              Fretadão
-            </span>
+            Missão Maio Amarelo
           </Link>
-
-          {/* Links — desktop */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "28px",
-              flex: 1,
-              justifyContent: "center",
-            }}
-            className="hidden-mobile"
-          >
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="nav-link">
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Botão CTA */}
-          <div style={{ flexShrink: 0 }} className="hidden-mobile">
-            <Link href="/missao" className="btn-missao">
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                <polyline points="22 4 12 14.01 9 11.01" />
-              </svg>
-              Missão Maio Amarelo
-            </Link>
-          </div>
-
           <ThemeToggle />
+        </div>
 
-          {/* Hambúrguer — mobile */}
+        {/* Mobile — ThemeToggle + Hambúrguer */}
+        <div className="flex md:hidden items-center gap-3">
+          <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{
-              display: "none",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "4px",
-            }}
-            className="show-mobile"
+            className="bg-transparent border-none cursor-pointer p-1"
             aria-label="Menu"
           >
             <svg
@@ -224,7 +100,7 @@ export default function Navbar() {
               height="22"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#ffffff"
+              stroke="var(--text-primary)"
               strokeWidth="2"
               strokeLinecap="round"
             >
@@ -243,61 +119,43 @@ export default function Navbar() {
             </svg>
           </button>
         </div>
+      </div>
 
-        {/* Menu mobile */}
-        {menuOpen && (
-          <div
-            style={{
-              backgroundColor: "#1a1a1a",
-              padding: "8px 24px 24px",
-              borderTop: "1px solid #2a2a2a",
-            }}
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="mobile-nav-link"
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+      {/* Menu mobile */}
+      {menuOpen && (
+        <div className="md:hidden bg-[var(--bg-primary)] border-t border-[var(--border)] px-6 pb-6 pt-2">
+          {navLinks.map((link) => (
             <Link
-              href="/missao"
-              className="btn-missao"
-              style={{ marginTop: "16px", justifyContent: "center" }}
+              key={link.href}
+              href={link.href}
               onClick={() => setMenuOpen(false)}
+              className="block text-[var(--text-muted)] text-sm font-medium tracking-wide uppercase no-underline py-3 border-b border-[var(--border)] transition-colors hover:text-[var(--text-primary)]"
             >
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                <polyline points="22 4 12 14.01 9 11.01" />
-              </svg>
-              Missão Maio Amarelo
+              {link.label}
             </Link>
-          </div>
-        )}
-
-        {/* Responsividade inline */}
-        <style>{`
-          @media (max-width: 900px) {
-            .hidden-mobile { display: none !important; }
-            .show-mobile { display: flex !important; }
-          }
-          @media (min-width: 901px) {
-            .show-mobile { display: none !important; }
-          }
-        `}</style>
-      </nav>
-    </>
+          ))}
+          <Link
+            href="/missao"
+            onClick={() => setMenuOpen(false)}
+            className="mt-4 flex items-center justify-center gap-1.5 bg-[#eab308] text-[#1a1a1a] text-xs font-bold tracking-wide uppercase px-4 py-2 rounded-md no-underline"
+          >
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            Missão Maio Amarelo
+          </Link>
+        </div>
+      )}
+    </nav>
   );
 }

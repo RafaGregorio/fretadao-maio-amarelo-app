@@ -32,42 +32,16 @@ function BarraProgresso({
   }, [percentual]);
 
   return (
-    <div style={{ marginBottom: "24px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "8px",
-        }}
-      >
-        <span
-          style={{
-            color: "var(--text-primary)",
-            fontSize: "0.875rem",
-            fontWeight: 500,
-          }}
-        >
+    <div className="mb-6">
+      <div className="flex justify-between mb-2">
+        <span className="text-[var(--text-primary)] text-sm font-medium">
           {nome}
         </span>
-        <span
-          style={{
-            color: "var(--accent)",
-            fontSize: "0.8rem",
-            fontFamily: "monospace",
-            fontWeight: 600,
-          }}
-        >
+        <span className="text-[var(--accent)] text-[0.8rem] font-semibold font-mono">
           {valor}
         </span>
       </div>
-      <div
-        style={{
-          height: "6px",
-          backgroundColor: "var(--bg-hover)",
-          borderRadius: "3px",
-          overflow: "hidden",
-        }}
-      >
+      <div className="h-[6px] bg-[var(--bg-hover)] rounded-[3px] overflow-hidden">
         <div
           ref={barRef}
           style={{
@@ -93,11 +67,7 @@ function AlertaBox({
   cor?: "accent" | "yellow" | "green";
 }) {
   const borderColor =
-    cor === "yellow"
-      ? "#eab308"
-      : cor === "green"
-        ? "#00C851"
-        : "var(--accent)";
+    cor === "yellow" ? "#eab308" : cor === "green" ? "#00C851" : "var(--accent)";
   const bgColor =
     cor === "yellow"
       ? "rgba(234,179,8,0.08)"
@@ -105,40 +75,25 @@ function AlertaBox({
         ? "rgba(0,200,81,0.08)"
         : "rgba(34,175,158,0.08)";
   const titleColor =
-    cor === "yellow"
-      ? "#eab308"
-      : cor === "green"
-        ? "#00C851"
-        : "var(--accent)";
+    cor === "yellow" ? "#eab308" : cor === "green" ? "#00C851" : "var(--accent)";
 
   return (
     <div
+      className="rounded-[4px] mb-4 p-5 sm:p-6"
       style={{
         background: bgColor,
         border: `1px solid ${borderColor}`,
         borderLeft: `5px solid ${borderColor}`,
-        padding: "24px 28px",
-        marginBottom: "16px",
-        borderRadius: "4px",
       }}
     >
       <p
-        style={{
-          color: titleColor,
-          fontWeight: 700,
-          fontSize: "0.9rem",
-          letterSpacing: "0.05em",
-          marginBottom: "8px",
-        }}
+        className="font-bold text-[0.85rem] sm:text-[0.9rem] tracking-[0.05em] mb-2"
+        style={{ color: titleColor }}
       >
         {titulo}
       </p>
       <p
-        style={{
-          color: "var(--text-muted)",
-          fontSize: "0.875rem",
-          lineHeight: 1.7,
-        }}
+        className="text-[var(--text-muted)] text-[0.875rem] leading-[1.7]"
         dangerouslySetInnerHTML={{ __html: texto }}
       />
     </div>
@@ -149,54 +104,31 @@ export default function SegurancaPage() {
   return (
     <>
       <style>{`
-        .sec { padding: 72px 24px; border-top: 1px solid var(--border); }
-        .sec-alt { background-color: var(--bg-secondary); }
-        .sec-label {
-          font-size: 0.65rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          color: var(--accent);
-          margin-bottom: 12px;
-          display: block;
-        }
-        .sec-titulo {
-          font-size: clamp(1.8rem, 4vw, 3rem);
-          font-weight: 900;
-          color: var(--text-primary);
-          margin-bottom: 40px;
-          line-height: 1.1;
-        }
-        .sec-titulo em { color: var(--accent); font-style: normal; }
-
         .stat-card {
           background-color: var(--bg-secondary);
           border-top: 3px solid var(--accent);
-          padding: 24px 20px;
           transition: transform 0.2s ease;
         }
         .stat-card:hover { transform: translateY(-3px); }
         .stat-card.yellow { border-color: #eab308; }
         .stat-card.orange { border-color: #f97316; }
-        .stat-card.green { border-color: #00C851; }
+        .stat-card.green  { border-color: #00C851; }
 
         .info-card {
           background-color: var(--bg-secondary);
           border: 1px solid var(--border);
           border-left: 4px solid var(--accent);
-          padding: 28px;
           transition: transform 0.2s ease;
           position: relative;
         }
         .info-card:hover { transform: translateY(-3px); }
         .info-card.yellow { border-left-color: #eab308; }
-        .info-card.green { border-left-color: #00C851; }
+        .info-card.green  { border-left-color: #00C851; }
         .info-card.orange { border-left-color: #f97316; }
 
         .hora-card {
           background-color: var(--bg-secondary);
           border: 1px solid var(--border);
-          padding: 28px 20px;
           text-align: center;
           transition: transform 0.2s ease;
         }
@@ -205,107 +137,42 @@ export default function SegurancaPage() {
           background-color: #eab308;
           border-color: #eab308;
         }
-
-        .empresa-row {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 14px 0;
-          border-bottom: 1px solid var(--border);
-        }
-
-        .legenda-item {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 16px;
-        }
       `}</style>
 
       <Navbar />
 
-      <main
-        style={{
-          backgroundColor: "var(--bg-primary)",
-          transition: "background-color 0.3s ease",
-        }}
-      >
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+      <main className="bg-[var(--bg-primary)] transition-colors duration-300">
+        <div className="max-w-[1280px] mx-auto">
+
           {/* ── HERO ── */}
-          <div style={{ padding: "72px 24px 64px" }}>
-            <span className="sec-label">
+          <div className="px-4 sm:px-6 pt-14 sm:pt-16 pb-12 sm:pb-16">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
               🟡 Maio Amarelo — Segurança no Trânsito 2026
             </span>
-            <h1
-              style={{
-                fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-                fontWeight: 900,
-                color: "var(--text-primary)",
-                lineHeight: 1.05,
-                marginBottom: "16px",
-              }}
-            >
+            <h1 className="text-4xl sm:text-5xl md:text-[clamp(2.5rem,6vw,4.5rem)] font-black text-[var(--text-primary)] leading-[1.05] mb-4">
               Segurança{" "}
-              <span style={{ color: "var(--accent)" }}>no Trânsito</span>
+              <span className="text-[var(--accent)]">no Trânsito</span>
             </h1>
-            <div
-              style={{
-                width: "48px",
-                height: "3px",
-                backgroundColor: "var(--accent)",
-                borderRadius: "999px",
-                margin: "16px 0 20px",
-              }}
-            />
-            <p
-              style={{
-                color: "var(--text-muted)",
-                fontSize: "1rem",
-                maxWidth: "700px",
-                lineHeight: 1.7,
-                marginBottom: "48px",
-              }}
-            >
+            <div className="w-12 h-[3px] bg-[var(--accent)] rounded-full my-4" />
+            <p className="text-[var(--text-muted)] text-sm sm:text-base max-w-[700px] leading-[1.7] mb-10 sm:mb-12">
               Dados oficiais de março e abril de 2026. Conheça os números,
               entenda os riscos e adote uma postura mais segura no trânsito.
               Cada informação aqui pode salvar uma vida.
             </p>
 
             {/* Stats */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-                gap: "2px",
-                maxWidth: "680px",
-              }}
-            >
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-[2px] max-w-[680px]">
               {[
                 { num: "50", label: "Total de ocorrências", cls: "" },
                 { num: "40", label: "Acidentes", cls: "yellow" },
                 { num: "10", label: "Incidentes", cls: "orange" },
-                { num: "3", label: "Vítimas com ferimentos", cls: "" },
+                { num: "3",  label: "Vítimas com ferimentos", cls: "" },
               ].map((s) => (
-                <div key={s.label} className={`stat-card ${s.cls}`}>
-                  <div
-                    style={{
-                      fontSize: "3rem",
-                      fontWeight: 900,
-                      color: "var(--text-primary)",
-                      lineHeight: 1,
-                    }}
-                  >
+                <div key={s.label} className={`stat-card p-5 sm:p-6`+ (s.cls ? ` ${s.cls}` : "")}>
+                  <div className="text-4xl sm:text-5xl font-black text-[var(--text-primary)] leading-none">
                     {s.num}
                   </div>
-                  <div
-                    style={{
-                      fontSize: "0.65rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                      color: "var(--text-faint)",
-                      marginTop: "6px",
-                    }}
-                  >
+                  <div className="text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.1em] text-[var(--text-faint)] mt-1.5">
                     {s.label}
                   </div>
                 </div>
@@ -314,18 +181,14 @@ export default function SegurancaPage() {
           </div>
 
           {/* ── 01 VISÃO GERAL ── */}
-          <section className="sec sec-alt">
-            <span className="sec-label">01 — Visão Geral</span>
-            <h2 className="sec-titulo">
-              OS NÚMEROS <em>QUE IMPORTAM</em>
+          <section className="px-4 sm:px-6 py-14 sm:py-16 border-t border-[var(--border)] bg-[var(--bg-secondary)]">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
+              01 — Visão Geral
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-8 sm:mb-10">
+              OS NÚMEROS <em className="text-[var(--accent)] not-italic">QUE IMPORTAM</em>
             </h2>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                gap: "2px",
-              }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-[2px]">
               {[
                 {
                   icone: "📅",
@@ -356,40 +219,15 @@ export default function SegurancaPage() {
                   cls: "orange",
                 },
               ].map((c) => (
-                <div key={c.titulo} className={`info-card ${c.cls}`}>
-                  <div style={{ fontSize: "1.6rem", marginBottom: "12px" }}>
-                    {c.icone}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.7rem",
-                      fontWeight: 700,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--text-muted)",
-                      marginBottom: "8px",
-                    }}
-                  >
+                <div key={c.titulo} className={`info-card p-6 sm:p-7${c.cls ? ` ${c.cls}` : ""}`}>
+                  <div className="text-2xl sm:text-[1.6rem] mb-3">{c.icone}</div>
+                  <div className="text-[0.65rem] sm:text-[0.7rem] font-bold tracking-[0.1em] uppercase text-[var(--text-muted)] mb-2">
                     {c.titulo}
                   </div>
-                  <div
-                    style={{
-                      fontSize: "3rem",
-                      fontWeight: 900,
-                      color: "var(--text-primary)",
-                      lineHeight: 1,
-                      marginBottom: "8px",
-                    }}
-                  >
+                  <div className="text-4xl sm:text-5xl font-black text-[var(--text-primary)] leading-none mb-2">
                     {c.valor}
                   </div>
-                  <div
-                    style={{
-                      fontSize: "0.8rem",
-                      color: "var(--text-faint)",
-                      lineHeight: 1.6,
-                    }}
-                  >
+                  <div className="text-[0.78rem] sm:text-[0.8rem] text-[var(--text-faint)] leading-[1.6]">
                     {c.desc}
                   </div>
                 </div>
@@ -398,67 +236,23 @@ export default function SegurancaPage() {
           </section>
 
           {/* ── 02 TIPOS DE ACIDENTE ── */}
-          <section className="sec">
-            <span className="sec-label">02 — Tipos de Ocorrência</span>
-            <h2 className="sec-titulo">
-              COMO OS <em>ACIDENTES ACONTECEM</em>
+          <section className="px-4 sm:px-6 py-14 sm:py-16 border-t border-[var(--border)]">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
+              02 — Tipos de Ocorrência
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-8 sm:mb-10">
+              COMO OS <em className="text-[var(--accent)] not-italic">ACIDENTES ACONTECEM</em>
             </h2>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "40px",
-              }}
-            >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
               <div>
-                <BarraProgresso
-                  nome="🚗 Colisão Lateral"
-                  valor="18 — 36%"
-                  percentual={100}
-                  cor="var(--accent)"
-                />
-                <BarraProgresso
-                  nome="🚙 Colisão Traseira"
-                  valor="7 — 14%"
-                  percentual={39}
-                  cor="var(--accent)"
-                />
-                <BarraProgresso
-                  nome="🧱 Choque"
-                  valor="5 — 10%"
-                  percentual={28}
-                  cor="#eab308"
-                />
-                <BarraProgresso
-                  nome="🚧 Colisão com Objeto Fixo"
-                  valor="4 — 8%"
-                  percentual={22}
-                  cor="#f97316"
-                />
-                <BarraProgresso
-                  nome="🔄 Colisão Frontal"
-                  valor="3 — 6%"
-                  percentual={17}
-                  cor="#f97316"
-                />
-                <BarraProgresso
-                  nome="↩️ Colisão em Manobra de Ré"
-                  valor="3 — 6%"
-                  percentual={17}
-                  cor="#9ca3af"
-                />
-                <BarraProgresso
-                  nome="🔀 Colisão Transversal"
-                  valor="2 — 4%"
-                  percentual={11}
-                  cor="#9ca3af"
-                />
-                <BarraProgresso
-                  nome="🚨 Outros (incêndio, mecânico...)"
-                  valor="8 — 16%"
-                  percentual={44}
-                  cor="#00C851"
-                />
+                <BarraProgresso nome="🚗 Colisão Lateral"            valor="18 — 36%" percentual={100} cor="var(--accent)" />
+                <BarraProgresso nome="🚙 Colisão Traseira"           valor="7 — 14%"  percentual={39}  cor="var(--accent)" />
+                <BarraProgresso nome="🧱 Choque"                     valor="5 — 10%"  percentual={28}  cor="#eab308" />
+                <BarraProgresso nome="🚧 Colisão com Objeto Fixo"    valor="4 — 8%"   percentual={22}  cor="#f97316" />
+                <BarraProgresso nome="🔄 Colisão Frontal"            valor="3 — 6%"   percentual={17}  cor="#f97316" />
+                <BarraProgresso nome="↩️ Colisão em Manobra de Ré"  valor="3 — 6%"   percentual={17}  cor="#9ca3af" />
+                <BarraProgresso nome="🔀 Colisão Transversal"        valor="2 — 4%"   percentual={11}  cor="#9ca3af" />
+                <BarraProgresso nome="🚨 Outros (incêndio, mecânico...)" valor="8 — 16%" percentual={44} cor="#00C851" />
               </div>
               <div>
                 <AlertaBox
@@ -475,59 +269,27 @@ export default function SegurancaPage() {
           </section>
 
           {/* ── 03 CAUSAS E RESPONSABILIDADE ── */}
-          <section className="sec sec-alt">
-            <span className="sec-label">03 — Causas e Responsabilidade</span>
-            <h2 className="sec-titulo">
-              QUEM É <em>RESPONSÁVEL</em>
+          <section className="px-4 sm:px-6 py-14 sm:py-16 border-t border-[var(--border)] bg-[var(--bg-secondary)]">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
+              03 — Causas e Responsabilidade
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-8 sm:mb-10">
+              QUEM É <em className="text-[var(--accent)] not-italic">RESPONSÁVEL</em>
             </h2>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "40px",
-              }}
-            >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
               <div>
-                <p className="sec-label" style={{ marginBottom: "20px" }}>
+                <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-5">
                   Fator Determinante
-                </p>
-                <BarraProgresso
-                  nome="👤 Fator Humano"
-                  valor="37 — 74%"
-                  percentual={100}
-                  cor="var(--accent)"
-                />
-                <BarraProgresso
-                  nome="🛣️ Via / Meio Ambiente"
-                  valor="9 — 18%"
-                  percentual={24}
-                  cor="#eab308"
-                />
-                <BarraProgresso
-                  nome="🚌 Veículo"
-                  valor="2 — 4%"
-                  percentual={5}
-                  cor="#00C851"
-                />
+                </span>
+                <BarraProgresso nome="👤 Fator Humano"       valor="37 — 74%" percentual={100} cor="var(--accent)" />
+                <BarraProgresso nome="🛣️ Via / Meio Ambiente" valor="9 — 18%"  percentual={24}  cor="#eab308" />
+                <BarraProgresso nome="🚌 Veículo"            valor="2 — 4%"   percentual={5}   cor="#00C851" />
 
-                <p
-                  className="sec-label"
-                  style={{ marginBottom: "20px", marginTop: "32px" }}
-                >
+                <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mt-8 mb-5">
                   Responsabilidade
-                </p>
-                <BarraProgresso
-                  nome="🚗 Terceiros (outros motoristas)"
-                  valor="24 — 48%"
-                  percentual={100}
-                  cor="#f97316"
-                />
-                <BarraProgresso
-                  nome="🧑 Motorista do Fretado"
-                  valor="23 — 46%"
-                  percentual={96}
-                  cor="var(--accent)"
-                />
+                </span>
+                <BarraProgresso nome="🚗 Terceiros (outros motoristas)" valor="24 — 48%" percentual={100} cor="#f97316" />
+                <BarraProgresso nome="🧑 Motorista do Fretado"          valor="23 — 46%" percentual={96}  cor="var(--accent)" />
               </div>
               <div>
                 <AlertaBox
@@ -549,81 +311,38 @@ export default function SegurancaPage() {
           </section>
 
           {/* ── 04 HORÁRIOS ── */}
-          <section className="sec">
-            <span className="sec-label">04 — Quando Acontece</span>
-            <h2 className="sec-titulo">
-              OS HORÁRIOS <em>MAIS PERIGOSOS</em>
+          <section className="px-4 sm:px-6 py-14 sm:py-16 border-t border-[var(--border)]">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
+              04 — Quando Acontece
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-8 sm:mb-10">
+              OS HORÁRIOS <em className="text-[var(--accent)] not-italic">MAIS PERIGOSOS</em>
             </h2>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "2px",
-                marginBottom: "32px",
-              }}
-            >
+            {/* Cards de horário */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-[2px] mb-8">
               {[
-                {
-                  label: "🌙 Madrugada (00–6h)",
-                  num: "8",
-                  pct: "16% das ocorrências",
-                  destaque: false,
-                },
-                {
-                  label: "🌅 Manhã (06–12h)",
-                  num: "11",
-                  pct: "22% das ocorrências",
-                  destaque: false,
-                },
-                {
-                  label: "☀️ Tarde (12–18h)",
-                  num: "16",
-                  pct: "32% das ocorrências",
-                  destaque: true,
-                },
-                {
-                  label: "🌆 Noite (18–00h)",
-                  num: "15",
-                  pct: "30% das ocorrências",
-                  destaque: false,
-                },
+                { label: "🌙 Madrugada (00–6h)", num: "8",  pct: "16% das ocorrências", destaque: false },
+                { label: "🌅 Manhã (06–12h)",    num: "11", pct: "22% das ocorrências", destaque: false },
+                { label: "☀️ Tarde (12–18h)",    num: "16", pct: "32% das ocorrências", destaque: true  },
+                { label: "🌆 Noite (18–00h)",    num: "15", pct: "30% das ocorrências", destaque: false },
               ].map((h) => (
-                <div
-                  key={h.label}
-                  className={`hora-card ${h.destaque ? "destaque" : ""}`}
-                >
+                <div key={h.label} className={`hora-card px-3 sm:px-5 py-6 sm:py-7${h.destaque ? " destaque" : ""}`}>
                   <div
-                    style={{
-                      fontSize: "0.65rem",
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      color: h.destaque
-                        ? "rgba(0,0,0,0.5)"
-                        : "var(--text-faint)",
-                      marginBottom: "12px",
-                    }}
+                    className="text-[0.6rem] sm:text-[0.65rem] tracking-[0.12em] uppercase mb-3"
+                    style={{ color: h.destaque ? "rgba(0,0,0,0.5)" : "var(--text-faint)" }}
                   >
                     {h.label}
                   </div>
                   <div
-                    style={{
-                      fontSize: "3.5rem",
-                      fontWeight: 900,
-                      color: h.destaque ? "#111" : "var(--text-primary)",
-                      lineHeight: 1,
-                    }}
+                    className="text-5xl sm:text-[3.5rem] font-black leading-none"
+                    style={{ color: h.destaque ? "#111" : "var(--text-primary)" }}
                   >
                     {h.num}
                   </div>
                   <div
-                    style={{
-                      fontSize: "0.75rem",
-                      color: h.destaque
-                        ? "rgba(0,0,0,0.45)"
-                        : "var(--text-faint)",
-                      marginTop: "6px",
-                    }}
+                    className="text-xs sm:text-[0.75rem] mt-1.5"
+                    style={{ color: h.destaque ? "rgba(0,0,0,0.45)" : "var(--text-faint)" }}
                   >
                     {h.pct}
                   </div>
@@ -636,203 +355,61 @@ export default function SegurancaPage() {
               texto="O período das 12h às 00h é o mais crítico. À tarde, o volume de tráfego é alto e o calor causa fadiga. À noite, a visibilidade reduz e a concentração cai. Dobre a atenção nesses períodos — reduza a velocidade, aumente o espaçamento e evite distrações."
             />
 
-            <p
-              className="sec-label"
-              style={{ marginTop: "32px", marginBottom: "20px" }}
-            >
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mt-8 mb-5">
               Dias da Semana
-            </p>
-            <BarraProgresso
-              nome="Quarta-feira"
-              valor="10 — 20%"
-              percentual={100}
-              cor="#F53B16"
-            />
-            <BarraProgresso
-              nome="Sexta-feira"
-              valor="8 — 16%"
-              percentual={80}
-              cor="#f97316"
-            />
-            <BarraProgresso
-              nome="Sábado"
-              valor="8 — 16%"
-              percentual={80}
-              cor="#f97316"
-            />
-            <BarraProgresso
-              nome="Segunda-feira"
-              valor="7 — 14%"
-              percentual={70}
-              cor="#eab308"
-            />
-            <BarraProgresso
-              nome="Domingo"
-              valor="6 — 12%"
-              percentual={60}
-              cor="#eab308"
-            />
-            <BarraProgresso
-              nome="Quinta-feira"
-              valor="6 — 12%"
-              percentual={60}
-              cor="#00C851"
-            />
-            <BarraProgresso
-              nome="Terça-feira"
-              valor="4 — 8%"
-              percentual={40}
-              cor="#00C851"
-            />
+            </span>
+            <BarraProgresso nome="Quarta-feira"  valor="10 — 20%" percentual={100} cor="#F53B16" />
+            <BarraProgresso nome="Sexta-feira"   valor="8 — 16%"  percentual={80}  cor="#f97316" />
+            <BarraProgresso nome="Sábado"        valor="8 — 16%"  percentual={80}  cor="#f97316" />
+            <BarraProgresso nome="Segunda-feira" valor="7 — 14%"  percentual={70}  cor="#eab308" />
+            <BarraProgresso nome="Domingo"       valor="6 — 12%"  percentual={60}  cor="#eab308" />
+            <BarraProgresso nome="Quinta-feira"  valor="6 — 12%"  percentual={60}  cor="#00C851" />
+            <BarraProgresso nome="Terça-feira"   valor="4 — 8%"   percentual={40}  cor="#00C851" />
           </section>
 
           {/* ── 05 GRAVIDADE ── */}
-          <section className="sec sec-alt">
-            <span className="sec-label">05 — Gravidade</span>
-            <h2 className="sec-titulo">
-              NÍVEL DE <em>GRAVIDADE</em>
+          <section className="px-4 sm:px-6 py-14 sm:py-16 border-t border-[var(--border)] bg-[var(--bg-secondary)]">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
+              05 — Gravidade
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-8 sm:mb-10">
+              NÍVEL DE <em className="text-[var(--accent)] not-italic">GRAVIDADE</em>
             </h2>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "40px",
-                alignItems: "start",
-              }}
-            >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 items-start">
               {/* Donut */}
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <svg width="220" height="220" viewBox="0 0 220 220">
-                  <circle
-                    cx="110"
-                    cy="110"
-                    r="90"
-                    fill="none"
-                    stroke="var(--bg-hover)"
-                    strokeWidth="28"
-                  />
-                  <circle
-                    cx="110"
-                    cy="110"
-                    r="90"
-                    fill="none"
-                    stroke="#00C851"
-                    strokeWidth="28"
-                    strokeDasharray="362 203"
-                    strokeDashoffset="0"
-                    transform="rotate(-90 110 110)"
-                  />
-                  <circle
-                    cx="110"
-                    cy="110"
-                    r="90"
-                    fill="none"
-                    stroke="#FFD000"
-                    strokeWidth="28"
-                    strokeDasharray="124 441"
-                    strokeDashoffset="-362"
-                    transform="rotate(-90 110 110)"
-                  />
-                  <circle
-                    cx="110"
-                    cy="110"
-                    r="90"
-                    fill="none"
-                    stroke="#FF6B00"
-                    strokeWidth="28"
-                    strokeDasharray="34 531"
-                    strokeDashoffset="-486"
-                    transform="rotate(-90 110 110)"
-                  />
-                  <circle
-                    cx="110"
-                    cy="110"
-                    r="90"
-                    fill="none"
-                    stroke="#E8002A"
-                    strokeWidth="28"
-                    strokeDasharray="45 520"
-                    strokeDashoffset="-520"
-                    transform="rotate(-90 110 110)"
-                  />
-                  <text
-                    x="110"
-                    y="104"
-                    textAnchor="middle"
-                    fontSize="36"
-                    fontWeight="900"
-                    fill="var(--text-primary)"
-                  >
-                    50
-                  </text>
-                  <text
-                    x="110"
-                    y="124"
-                    textAnchor="middle"
-                    fontSize="11"
-                    fill="var(--text-faint)"
-                    letterSpacing="1"
-                  >
-                    OCORRÊNCIAS
-                  </text>
+              <div className="flex justify-center">
+                <svg width="220" height="220" viewBox="0 0 220 220" className="w-[180px] h-[180px] sm:w-[220px] sm:h-[220px]">
+                  <circle cx="110" cy="110" r="90" fill="none" stroke="var(--bg-hover)" strokeWidth="28" />
+                  <circle cx="110" cy="110" r="90" fill="none" stroke="#00C851" strokeWidth="28" strokeDasharray="362 203" strokeDashoffset="0" transform="rotate(-90 110 110)" />
+                  <circle cx="110" cy="110" r="90" fill="none" stroke="#FFD000" strokeWidth="28" strokeDasharray="124 441" strokeDashoffset="-362" transform="rotate(-90 110 110)" />
+                  <circle cx="110" cy="110" r="90" fill="none" stroke="#FF6B00" strokeWidth="28" strokeDasharray="34 531" strokeDashoffset="-486" transform="rotate(-90 110 110)" />
+                  <circle cx="110" cy="110" r="90" fill="none" stroke="#E8002A" strokeWidth="28" strokeDasharray="45 520" strokeDashoffset="-520" transform="rotate(-90 110 110)" />
+                  <text x="110" y="104" textAnchor="middle" fontSize="36" fontWeight="900" fill="var(--text-primary)">50</text>
+                  <text x="110" y="124" textAnchor="middle" fontSize="11" fill="var(--text-faint)" letterSpacing="1">OCORRÊNCIAS</text>
                 </svg>
               </div>
               {/* Legenda */}
               <div>
                 {[
-                  {
-                    cor: "#00C851",
-                    nome: "Sem vítima — Potencial Baixo",
-                    pct: "32 (64%)",
-                  },
-                  {
-                    cor: "#FFD000",
-                    nome: "Sem vítima — Potencial Médio",
-                    pct: "11 (22%)",
-                  },
-                  {
-                    cor: "#FF6B00",
-                    nome: "Sem vítima — Potencial Alto",
-                    pct: "3 (6%)",
-                  },
-                  {
-                    cor: "#E8002A",
-                    nome: "Com vítima — Ferimentos Leves",
-                    pct: "4 (8%)",
-                  },
+                  { cor: "#00C851", nome: "Sem vítima — Potencial Baixo",  pct: "32 (64%)" },
+                  { cor: "#FFD000", nome: "Sem vítima — Potencial Médio",  pct: "11 (22%)" },
+                  { cor: "#FF6B00", nome: "Sem vítima — Potencial Alto",   pct: "3 (6%)"   },
+                  { cor: "#E8002A", nome: "Com vítima — Ferimentos Leves", pct: "4 (8%)"   },
                 ].map((l) => (
-                  <div key={l.nome} className="legenda-item">
+                  <div key={l.nome} className="flex items-center gap-3 mb-4">
                     <div
-                      style={{
-                        width: "16px",
-                        height: "16px",
-                        borderRadius: "3px",
-                        backgroundColor: l.cor,
-                        flexShrink: 0,
-                      }}
+                      className="w-4 h-4 rounded-[3px] shrink-0"
+                      style={{ backgroundColor: l.cor }}
                     />
-                    <span
-                      style={{
-                        color: "var(--text-muted)",
-                        fontSize: "0.875rem",
-                        flex: 1,
-                      }}
-                    >
+                    <span className="text-[var(--text-muted)] text-[0.875rem] flex-1">
                       {l.nome}
                     </span>
-                    <span
-                      style={{
-                        color: "var(--text-primary)",
-                        fontFamily: "monospace",
-                        fontSize: "0.875rem",
-                        fontWeight: 600,
-                      }}
-                    >
+                    <span className="text-[var(--text-primary)] font-mono text-[0.875rem] font-semibold">
                       {l.pct}
                     </span>
                   </div>
                 ))}
-                <div style={{ marginTop: "24px" }}>
+                <div className="mt-6">
                   <AlertaBox
                     titulo="🟡 28% COM POTENCIAL MÉDIO OU ALTO"
                     texto="14 ocorrências classificadas como potencial médio ou alto mostram que, sem as devidas precauções, qualquer uma delas poderia ter resultado em vítimas graves. A gravidade não é garantida — é prevenida."
@@ -844,60 +421,42 @@ export default function SegurancaPage() {
           </section>
 
           {/* ── 06 OPERAÇÕES ── */}
-          <section className="sec">
-            <span className="sec-label">06 — Operações</span>
-            <h2 className="sec-titulo">
-              ONDE MAIS <em>ACONTECE</em>
+          <section className="px-4 sm:px-6 py-14 sm:py-16 border-t border-[var(--border)]">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
+              06 — Operações
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-6 sm:mb-8">
+              ONDE MAIS <em className="text-[var(--accent)] not-italic">ACONTECE</em>
             </h2>
-            <p className="sec-label" style={{ marginBottom: "20px" }}>
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-5">
               Clientes com mais ocorrências
-            </p>
-            <div style={{ maxWidth: "600px" }}>
+            </span>
+            <div className="max-w-[600px]">
               {[
-                { rank: "01", nome: "Mercado Livre — SP02", count: 11 },
-                { rank: "02", nome: "Mercado Livre — SP04/14", count: 8 },
-                { rank: "03", nome: "Mercado Livre — Sortation", count: 8 },
-                { rank: "04", nome: "Mercado Livre — SP06", count: 7 },
-                { rank: "05", nome: "Clarios — Sorocaba", count: 3 },
+                { rank: "01", nome: "Mercado Livre — SP02",         count: 11 },
+                { rank: "02", nome: "Mercado Livre — SP04/14",      count: 8  },
+                { rank: "03", nome: "Mercado Livre — Sortation",    count: 8  },
+                { rank: "04", nome: "Mercado Livre — SP06",         count: 7  },
+                { rank: "05", nome: "Clarios — Sorocaba",           count: 3  },
               ].map((e) => (
-                <div key={e.rank} className="empresa-row">
-                  <span
-                    style={{
-                      fontWeight: 900,
-                      fontSize: "1.2rem",
-                      color: "var(--accent)",
-                      width: "40px",
-                      flexShrink: 0,
-                    }}
-                  >
+                <div
+                  key={e.rank}
+                  className="flex items-center gap-4 py-3.5 border-b border-[var(--border)]"
+                >
+                  <span className="font-black text-lg sm:text-[1.2rem] text-[var(--accent)] w-10 shrink-0">
                     {e.rank}
                   </span>
-                  <span
-                    style={{
-                      flex: 1,
-                      color: "var(--text-primary)",
-                      fontSize: "0.9rem",
-                      fontWeight: 500,
-                    }}
-                  >
+                  <span className="flex-1 text-[var(--text-primary)] text-sm sm:text-[0.9rem] font-medium">
                     {e.nome}
                   </span>
-                  <span
-                    style={{
-                      backgroundColor: "var(--bg-hover)",
-                      color: "var(--text-primary)",
-                      fontFamily: "monospace",
-                      fontSize: "0.8rem",
-                      padding: "4px 10px",
-                      borderRadius: "4px",
-                    }}
-                  >
+                  <span className="bg-[var(--bg-hover)] text-[var(--text-primary)] font-mono text-[0.75rem] sm:text-[0.8rem] px-2.5 py-1 rounded-[4px]">
                     {e.count}
                   </span>
                 </div>
               ))}
             </div>
           </section>
+
         </div>
       </main>
 

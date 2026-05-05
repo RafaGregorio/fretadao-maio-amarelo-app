@@ -4,139 +4,40 @@ import Link from "next/link";
 export default function PodcastSection() {
   return (
     <>
-      <style>{`
-        .podcast-cta-btn {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: center;
-          flex: 1;
-          height: 100%;
-          padding: 40px 48px;
-          background-color: var(--accent);
-          text-decoration: none;
-          transition: background-color 0.25s ease;
-          gap: 8px;
-        }
-        .podcast-cta-btn:hover {
-          background-color: #1a9080;
-        }
-        .podcast-cta-btn:hover .podcast-arrow {
-          transform: translateX(6px);
-        }
-        .podcast-arrow {
-          transition: transform 0.25s ease;
-          display: inline-block;
-        }
-      `}</style>
-
-      <section
-        style={{
-          backgroundColor: "var(--bg-primary)",
-          padding: "64px 24px",
-          transition: "background-color 0.3s ease",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            borderRadius: "16px",
-            overflow: "hidden",
-            display: "flex",
-            height: "260px",
-            border: "1px solid var(--border)",
-          }}
-        >
-          {/* 25% — Imagem */}
-          <div
-            style={{
-              width: "25%",
-              position: "relative",
-              backgroundColor: "#111111",
-              flexShrink: 0,
-              overflow: "hidden",
-            }}
-          >
+      <section className="bg-[var(--bg-primary)] px-6 py-16 transition-colors duration-300">
+        <div className="max-w-[1280px] mx-auto rounded-2xl overflow-hidden border border-[var(--border)] flex flex-col md:flex-row md:h-[260px]">
+          {/* Imagem */}
+          <div className="relative w-full h-[200px] md:w-[25%] md:h-full bg-[#111111] shrink-0 overflow-hidden">
             <Image
               src="/podcastHost.png"
               alt="Host do Podcast Na Pista"
               fill
-              sizes="25vw"
-              style={{
-                objectFit: "cover",
-                objectPosition: "center top",
-              }}
+              sizes="(max-width: 768px) 100vw, 25vw"
+              className="object-cover object-top"
             />
           </div>
 
-          {/* 75% — Botão CTA */}
-          <Link href="/categoria/podcast" className="podcast-cta-btn">
+          {/* CTA */}
+          <Link
+            href="/categoria/podcast"
+            className="group flex flex-col justify-center flex-1 px-8 py-10 md:px-12 md:py-0 bg-[var(--accent)] no-underline transition-colors duration-200 hover:bg-[var(--accentH)] gap-2"
+          >
             <span
-              style={{
-                color: "rgba(255,255,255,0.75)",
-                fontSize: "0.7rem",
-                fontWeight: 700,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-              }}
-            >
-              Podcast Na Pista · Episódio de hoje
-            </span>
-
-            <span
-              style={{
-                color: "#ffffff",
-                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                fontWeight: 800,
-                lineHeight: 1.15,
-                maxWidth: "600px",
-              }}
+              className="text-white font-extrabold leading-tight"
+              style={{ fontSize: "clamp(1.4rem, 3vw, 2.25rem)" }}
             >
               Ouça agora o podcast de hoje
             </span>
 
-            <span
-              style={{
-                color: "rgba(255,255,255,0.8)",
-                fontSize: "0.9rem",
-                marginTop: "4px",
-              }}
-            >
-              Para quem dirige a trabalho e para quem usa o carro todo dia.
-            </span>
-
-            <span
-              style={{
-                marginTop: "16px",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                color: "#ffffff",
-                fontSize: "0.8rem",
-                fontWeight: 700,
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                borderBottom: "1.5px solid rgba(255,255,255,0.5)",
-                paddingBottom: "2px",
-              }}
-            >
-              Ver todos os episódios
-              <span className="podcast-arrow">→</span>
+            <span className="mt-2 inline-flex items-center gap-2 text-white text-xs font-bold tracking-widest uppercase border-b border-white/50 pb-0.5 w-fit transition-transform duration-200 group-hover:translate-x-1">
+              Ver todos os episódios →
             </span>
           </Link>
         </div>
       </section>
 
       {/* Divisor */}
-      <div
-        style={{
-          height: "1px",
-          backgroundColor: "var(--border)",
-          maxWidth: "1280px",
-          margin: "0 auto",
-        }}
-      />
+      <div className="h-px bg-[var(--border)] max-w-[1280px] mx-auto" />
     </>
   );
 }

@@ -84,6 +84,7 @@ export default function PodcastPage() {
   };
 
   const progress = (currentTime / duration) * 100;
+  const volPct = `${(muted ? 0 : volume) * 100}%`;
 
   return (
     <>
@@ -94,45 +95,26 @@ export default function PodcastPage() {
         }
         .mic-icon { animation: mic-pulse 2.5s ease-in-out infinite; display: inline-block; }
 
-        .progress-track {
-          width: 100%;
-          height: 5px;
-          background-color: var(--bg-hover);
+        @keyframes wave {
+          0%, 100% { transform: scaleY(0.4); }
+          50% { transform: scaleY(1); }
+        }
+        .wave-bar {
+          width: 3px;
           border-radius: 999px;
-          cursor: pointer;
-          position: relative;
-        }
-        .progress-fill {
-          height: 100%;
           background-color: var(--accent);
-          border-radius: 999px;
-          pointer-events: none;
-          transition: width 0.1s linear;
+          transform-origin: bottom;
         }
-
-        .play-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          padding: 14px 40px;
-          border-radius: 10px;
-          background-color: var(--accent);
-          border: none;
-          cursor: pointer;
-          color: #ffffff;
-          font-size: 0.85rem;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          transition: background-color 0.2s ease, transform 0.15s ease;
-        }
-        .play-btn:hover { background-color: #1a9080; transform: scale(1.03); }
+        .wave-bar.active { animation: wave 0.8s ease-in-out infinite; }
+        .wave-bar:nth-child(2).active { animation-delay: 0.15s; }
+        .wave-bar:nth-child(3).active { animation-delay: 0.3s; }
+        .wave-bar:nth-child(4).active { animation-delay: 0.45s; }
+        .wave-bar:nth-child(5).active { animation-delay: 0.6s; }
 
         .vol-bar {
           -webkit-appearance: none;
           appearance: none;
-          width: 90px;
+          width: 80px;
           height: 3px;
           border-radius: 999px;
           outline: none;
@@ -154,62 +136,23 @@ export default function PodcastPage() {
           cursor: pointer;
         }
 
-        @keyframes wave {
-          0%, 100% { transform: scaleY(0.4); }
-          50% { transform: scaleY(1); }
+        @media (max-width: 480px) {
+          .vol-bar { width: 60px; }
         }
-        .wave-bar { width: 3px; border-radius: 999px; background-color: var(--accent); transform-origin: bottom; }
-        .wave-bar.active { animation: wave 0.8s ease-in-out infinite; }
-        .wave-bar:nth-child(2).active { animation-delay: 0.15s; }
-        .wave-bar:nth-child(3).active { animation-delay: 0.3s; }
-        .wave-bar:nth-child(4).active { animation-delay: 0.45s; }
-        .wave-bar:nth-child(5).active { animation-delay: 0.6s; }
-
-        .vol-btn {
-          background: none;
-          border: none;
-          cursor: pointer;
-          color: var(--text-muted);
-          display: flex;
-          align-items: center;
-          padding: 0;
-          transition: color 0.2s ease;
-        }
-        .vol-btn:hover { color: var(--text-primary); }
       `}</style>
 
       <Navbar />
 
-      <main
-        style={{
-          backgroundColor: "var(--bg-primary)",
-          minHeight: "100vh",
-          transition: "background-color 0.3s ease",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "860px",
-            margin: "0 auto",
-            padding: "80px 24px 96px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+      <main className="min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
+        <div className="max-w-[860px] mx-auto px-4 sm:px-6 py-16 sm:py-20 pb-20 sm:pb-24 flex flex-col items-center">
+
           {/* Título */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
-              marginBottom: "16px",
-            }}
-          >
-            <span className="mic-icon">
+          <div className="flex items-center gap-3 sm:gap-4 mb-4">
+            <span className="mic-icon text-[var(--accent)]">
               <svg
-                width="36"
-                height="36"
+                width="28"
+                height="28"
+                className="sm:w-9 sm:h-9"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -223,67 +166,27 @@ export default function PodcastPage() {
                 <line x1="8" y1="23" x2="16" y2="23" />
               </svg>
             </span>
-            <h1
-              style={{
-                fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                fontWeight: 900,
-                color: "var(--text-primary)",
-                margin: 0,
-                lineHeight: 1,
-              }}
-            >
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-[var(--text-primary)] leading-none">
               Fretadão Podcast
             </h1>
           </div>
 
-          <p
-            style={{
-              color: "var(--text-faint)",
-              fontSize: "1rem",
-              lineHeight: 1.7,
-              textAlign: "center",
-              maxWidth: "520px",
-              marginBottom: "56px",
-            }}
-          >
+          <p className="text-[var(--text-faint)] text-sm sm:text-base leading-relaxed text-center max-w-[520px] mb-12 sm:mb-14 px-2">
             Conversas reais sobre segurança no trânsito, direção defensiva e a
             vida de quem move o Brasil todo dia.
           </p>
 
           {/* Card player */}
-          <div
-            style={{
-              width: "100%",
-              backgroundColor: "var(--bg-secondary)",
-              border: "1px solid var(--border)",
-              borderRadius: "20px",
-              padding: "36px 40px",
-            }}
-          >
+          <div className="w-full bg-[var(--bg-secondary)] border border-[var(--border)] rounded-2xl p-5 sm:p-8 md:p-10">
+
             {/* Info do episódio */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "20px",
-                marginBottom: "32px",
-              }}
-            >
-              <div
-                style={{
-                  width: "72px",
-                  height: "72px",
-                  borderRadius: "12px",
-                  backgroundColor: "var(--accent)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                }}
-              >
+            <div className="flex items-start gap-4 mb-8">
+              {/* Ícone do episódio */}
+              <div className="w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-xl bg-[var(--accent)] flex items-center justify-center shrink-0">
                 <svg
-                  width="28"
-                  height="28"
+                  width="22"
+                  height="22"
+                  className="sm:w-7 sm:h-7"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="#ffffff"
@@ -298,57 +201,21 @@ export default function PodcastPage() {
                 </svg>
               </div>
 
-              <div style={{ flex: 1 }}>
-                <div
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    backgroundColor: "rgba(34,175,158,0.12)",
-                    border: "1px solid rgba(34,175,158,0.25)",
-                    color: "var(--accent)",
-                    fontSize: "0.65rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    padding: "3px 10px",
-                    borderRadius: "999px",
-                    marginBottom: "8px",
-                  }}
-                >
+              {/* Texto do episódio */}
+              <div className="flex-1 min-w-0">
+                <div className="inline-flex items-center gap-1.5 bg-[rgba(34,175,158,0.12)] border border-[rgba(34,175,158,0.25)] text-[var(--accent)] text-[0.6rem] sm:text-[0.65rem] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full mb-2">
                   Ep. 01 · Maio Amarelo 2026
                 </div>
-                <h2
-                  style={{
-                    color: "var(--text-primary)",
-                    fontSize: "1.1rem",
-                    fontWeight: 700,
-                    margin: "0 0 4px 0",
-                  }}
-                >
+                <h2 className="text-[var(--text-primary)] text-base sm:text-lg font-bold mb-1">
                   Fretadão Podcast
                 </h2>
-                <p
-                  style={{
-                    color: "var(--text-faint)",
-                    fontSize: "0.8rem",
-                    margin: 0,
-                  }}
-                >
+                <p className="text-[var(--text-faint)] text-xs sm:text-sm leading-snug">
                   Ouça agora o podcast que preparamos especialmente para vocês!
                 </p>
               </div>
 
-              {/* Ondas */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-end",
-                  gap: "3px",
-                  height: "28px",
-                  flexShrink: 0,
-                }}
-              >
+              {/* Ondas animadas — ocultas em telas muito pequenas */}
+              <div className="hidden xs:flex sm:flex items-end gap-[3px] h-7 shrink-0">
                 {[18, 24, 20, 28, 16].map((h, i) => (
                   <div
                     key={i}
@@ -359,98 +226,38 @@ export default function PodcastPage() {
               </div>
             </div>
 
+            {/* Barra de progresso */}
             <div
               ref={progressBarRef}
-              className="progress-track"
+              className="w-full h-[5px] bg-[var(--bg-hover)] rounded-full cursor-pointer relative"
               onClick={handleProgressClick}
             >
               <div
-                className="progress-fill"
+                className="h-full bg-[var(--accent)] rounded-full pointer-events-none transition-[width] duration-100 ease-linear"
                 style={{ width: `${progress}%` }}
               />
             </div>
 
             {/* Tempo */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                margin: "8px 0 28px",
-              }}
-            >
-              <span
-                style={{
-                  color: "var(--text-faint)",
-                  fontSize: "0.75rem",
-                  fontFamily: "monospace",
-                }}
-              >
+            <div className="flex justify-between mt-2 mb-6 sm:mb-7">
+              <span className="text-[var(--text-faint)] text-xs font-mono">
                 {formatTime(currentTime)}
               </span>
-              <span
-                style={{
-                  color: "var(--text-faint)",
-                  fontSize: "0.75rem",
-                  fontFamily: "monospace",
-                }}
-              >
+              <span className="text-[var(--text-faint)] text-xs font-mono">
                 {formatTime(duration)}
               </span>
             </div>
 
-            {/* Controles: play | volume */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <div style={{ width: "130px" }} />
+            {/* Controles: volume | play | volume */}
+            <div className="flex items-center justify-between gap-3">
 
-              <button
-                className="play-btn"
-                onClick={togglePlay}
-                aria-label={playing ? "Pausar" : "Reproduzir"}
-              >
-                {playing ? (
-                  <>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <rect x="6" y="4" width="4" height="16" />
-                      <rect x="14" y="4" width="4" height="16" />
-                    </svg>
-                    Pausar
-                  </>
-                ) : (
-                  <>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                    Reproduzir
-                  </>
-                )}
-              </button>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  width: "130px",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <button className="vol-btn" onClick={toggleMute}>
+              {/* Controle de volume — esquerda */}
+              <div className="flex items-center gap-2 w-[110px] sm:w-[130px]">
+                <button
+                  onClick={toggleMute}
+                  className="bg-transparent border-none cursor-pointer text-[var(--text-muted)] flex items-center p-0 transition-colors duration-200 hover:text-[var(--text-primary)]"
+                  aria-label={muted ? "Desmutar" : "Mutar"}
+                >
                   {muted || volume === 0 ? (
                     <svg
                       width="16"
@@ -490,13 +297,36 @@ export default function PodcastPage() {
                   step={0.01}
                   value={muted ? 0 : volume}
                   onChange={handleVolume}
-                  style={
-                    {
-                      "--vol": `${(muted ? 0 : volume) * 100}%`,
-                    } as React.CSSProperties
-                  }
+                  style={{ "--vol": volPct } as React.CSSProperties}
                 />
               </div>
+
+              {/* Botão Play/Pause — centro */}
+              <button
+                onClick={togglePlay}
+                aria-label={playing ? "Pausar" : "Reproduzir"}
+                className="flex items-center justify-center gap-2 px-7 py-3 sm:px-10 sm:py-3.5 rounded-[10px] bg-[var(--accent)] border-none cursor-pointer text-white text-[0.8rem] sm:text-[0.85rem] font-bold tracking-[0.06em] uppercase transition-all duration-200 hover:bg-[#1a9080] hover:scale-[1.03] active:scale-95"
+              >
+                {playing ? (
+                  <>
+                    <svg width="14" height="14" className="sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="6" y="4" width="4" height="16" />
+                      <rect x="14" y="4" width="4" height="16" />
+                    </svg>
+                    Pausar
+                  </>
+                ) : (
+                  <>
+                    <svg width="14" height="14" className="sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    Reproduzir
+                  </>
+                )}
+              </button>
+
+              {/* Espaço direito para simetria */}
+              <div className="w-[110px] sm:w-[130px]" />
             </div>
           </div>
 

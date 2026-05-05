@@ -57,100 +57,35 @@ export default function PrevencaoPage() {
   return (
     <>
       <style>{`
-        .sec-label {
-          font-size: 0.65rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          color: var(--accent);
-          margin-bottom: 12px;
-          display: block;
-        }
-        .sec-titulo {
-          font-size: clamp(1.8rem, 4vw, 3rem);
-          font-weight: 900;
-          color: var(--text-primary);
-          margin-bottom: 40px;
-          line-height: 1.1;
-        }
-        .sec-titulo em { color: var(--accent); font-style: normal; }
-
         .dica-card {
           background-color: var(--bg-secondary);
           border: 1px solid var(--border);
           border-bottom: 3px solid transparent;
-          padding: 32px;
           transition: border-color 0.25s ease, transform 0.25s ease;
         }
         .dica-card:hover {
           border-bottom-color: var(--accent);
           transform: translateY(-3px);
         }
-        .dica-num {
-          font-size: 4rem;
-          font-weight: 900;
-          color: var(--border);
-          line-height: 1;
-          margin-bottom: 4px;
-        }
-        .dica-titulo {
-          font-size: 0.85rem;
-          font-weight: 800;
-          letter-spacing: 0.06em;
-          color: var(--accent);
-          margin-bottom: 12px;
-          text-transform: uppercase;
-        }
-        .dica-texto {
-          font-size: 0.875rem;
-          color: var(--text-primary);
-          line-height: 1.7;
-        }
       `}</style>
 
       <Navbar />
 
-      <main
-        style={{
-          backgroundColor: "var(--bg-primary)",
-          minHeight: "100vh",
-          transition: "background-color 0.3s ease",
-        }}
-      >
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+      <main className="min-h-screen bg-[var(--bg-primary)] transition-colors duration-300">
+        <div className="max-w-[1280px] mx-auto">
+
           {/* Header */}
-          <div style={{ padding: "72px 24px 64px" }}>
-            <span className="sec-label">07 — O Que Você Pode Fazer</span>
-            <h1
-              style={{
-                fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-                fontWeight: 900,
-                color: "var(--text-primary)",
-                lineHeight: 1.05,
-                marginBottom: "16px",
-              }}
-            >
+          <div className="px-4 sm:px-6 pt-14 sm:pt-16 pb-12 sm:pb-16">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
+              07 — O Que Você Pode Fazer
+            </span>
+            <h1 className="text-4xl sm:text-5xl md:text-[clamp(2.5rem,6vw,4.5rem)] font-black text-[var(--text-primary)] leading-[1.05] mb-4">
               Prevenção de
               <br />
-              <span style={{ color: "var(--accent)" }}>Acidentes</span>
+              <span className="text-[var(--accent)]">Acidentes</span>
             </h1>
-            <div
-              style={{
-                width: "48px",
-                height: "3px",
-                backgroundColor: "var(--accent)",
-                borderRadius: "999px",
-                margin: "16px 0 20px",
-              }}
-            />
-            <p
-              style={{
-                color: "var(--text-muted)",
-                fontSize: "1rem",
-                maxWidth: "560px",
-                lineHeight: 1.7,
-              }}
-            >
+            <div className="w-12 h-[3px] bg-[var(--accent)] rounded-full my-4" />
+            <p className="text-[var(--text-muted)] text-sm sm:text-base max-w-[560px] leading-relaxed">
               8 atitudes que todo motorista pode adotar agora. Baseadas nos
               dados reais de março e abril de 2026 — porque prevenir é sempre
               melhor que remediar.
@@ -158,107 +93,60 @@ export default function PrevencaoPage() {
           </div>
 
           {/* Grid de dicas */}
-          <div style={{ padding: "0 24px 80px" }}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                gap: "2px",
-              }}
-            >
+          <div className="px-4 sm:px-6 pb-16 sm:pb-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[2px]">
               {dicas.map((d) => (
-                <div key={d.num} className="dica-card">
-                  <div className="dica-num">{d.num}</div>
-                  <div className="dica-titulo">{d.titulo}</div>
-                  <p className="dica-texto">{d.texto}</p>
+                <div key={d.num} className="dica-card p-6 sm:p-8">
+                  <div className="text-5xl sm:text-6xl font-black text-[var(--border)] leading-none mb-1">
+                    {d.num}
+                  </div>
+                  <div className="text-[0.8rem] sm:text-[0.85rem] font-extrabold tracking-[0.06em] text-[var(--accent)] uppercase mb-3">
+                    {d.titulo}
+                  </div>
+                  <p className="text-[0.875rem] text-[var(--text-primary)] leading-relaxed">
+                    {d.texto}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Mensagem Final */}
-          <div
-            style={{
-              backgroundColor: "var(--bg-secondary)",
-              borderTop: "1px solid var(--border)",
-              padding: "80px 24px",
-              textAlign: "center",
-            }}
-          >
-            <span
-              className="sec-label"
-              style={{ justifyContent: "center", display: "block" }}
-            >
+          <div className="bg-[var(--bg-secondary)] border-t border-[var(--border)] px-4 sm:px-6 py-16 sm:py-20 text-center">
+            <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
               Mensagem Final
             </span>
-            <h2 className="sec-titulo" style={{ textAlign: "center" }}>
-              VOCÊ <em>FAZ A DIFERENÇA</em>
+            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-8 sm:mb-10">
+              VOCÊ{" "}
+              <em className="text-[var(--accent)] not-italic">FAZ A DIFERENÇA</em>
             </h2>
 
-            <p
-              style={{
-                maxWidth: "600px",
-                margin: "0 auto 20px",
-                fontSize: "1rem",
-                color: "var(--text-muted)",
-                lineHeight: 1.8,
-              }}
-            >
+            <p className="max-w-[600px] mx-auto mb-5 text-sm sm:text-base text-[var(--text-muted)] leading-[1.8]">
               50 ocorrências em dois meses. Cada uma delas tem um rosto, uma
               família, um impacto real. A maior descoberta desses dados é que{" "}
-              <strong style={{ color: "var(--text-primary)" }}>
+              <strong className="text-[var(--text-primary)]">
                 a maioria poderia ter sido evitada
               </strong>
               . O fator humano domina — e isso significa que a solução também
               está nas nossas mãos.
             </p>
 
-            <p
-              style={{
-                maxWidth: "600px",
-                margin: "0 auto 56px",
-                fontSize: "1rem",
-                color: "var(--text-muted)",
-                lineHeight: 1.8,
-              }}
-            >
+            <p className="max-w-[600px] mx-auto mb-12 sm:mb-14 text-sm sm:text-base text-[var(--text-muted)] leading-[1.8]">
               Dirija com atenção. Cuide dos seus passageiros. Volte para casa
               com segurança.
             </p>
 
             {/* Badge final */}
-            <div
-              style={{
-                display: "inline-block",
-                backgroundColor: "#eab308",
-                padding: "28px 48px",
-                borderRadius: "4px",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "clamp(2rem, 4vw, 3rem)",
-                  fontWeight: 900,
-                  color: "#1a1a1a",
-                  lineHeight: 1.1,
-                  letterSpacing: "0.04em",
-                }}
-              >
+            <div className="inline-block bg-[#eab308] px-8 sm:px-12 py-6 sm:py-7 rounded-[4px]">
+              <div className="text-3xl sm:text-4xl md:text-[clamp(2rem,4vw,3rem)] font-black text-[#1a1a1a] leading-[1.1] tracking-[0.04em]">
                 MAIO AMARELO
               </div>
-              <div
-                style={{
-                  fontSize: "clamp(2rem, 4vw, 3rem)",
-                  fontWeight: 900,
-                  color: "#1a1a1a",
-                  lineHeight: 1.1,
-                  letterSpacing: "0.04em",
-                }}
-              >
+              <div className="text-3xl sm:text-4xl md:text-[clamp(2rem,4vw,3rem)] font-black text-[#1a1a1a] leading-[1.1] tracking-[0.04em]">
                 VIDA NO TRÂNSITO
               </div>
             </div>
           </div>
+
         </div>
       </main>
 
