@@ -151,7 +151,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="h-px bg-[var(--border)] min-w-[1416px] mx-auto" />
+        <div className="h-px bg-[var(--border)] min-w-[1280px] mx-auto" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 pb-16 text-center">
           <span className="text-[var(--text-faint)] text-xs">

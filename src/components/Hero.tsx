@@ -14,7 +14,7 @@ export default function Hero() {
         .dot-pulse { animation: pulse-dot 1.4s ease-in-out infinite; }
       `}</style>
 
-      <section className="relative w-full min-h-[80vh] md:min-h-screen flex items-center overflow-hidden bg-[#111111]">
+      <section className="relative w-full min-h-[60vh] md:min-h-screen flex items-center overflow-hidden bg-[#111111]">
         {/* Image */}
         <Image
           src="/fretadao_heroimage.png"
@@ -106,6 +106,13 @@ export default function Hero() {
             </Link>
           </div>
         </div>
+        <div
+          className="absolute bottom-0 left-0 right-0 z-[2] h-28"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, var(--bg-primary))",
+          }}
+        />
       </section>
     </>
   );

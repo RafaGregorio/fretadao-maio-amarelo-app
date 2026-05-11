@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 const empresas = [
   "3 G Transporte Executivo",
   "Aguia Turismo",
-  "Amanhecer As Service",
+  "Amanhecer",
+  "As Service",
   "Bortolotto Fretamento",
   "Bpf Mobilidade Corporativa",
   "Branca De Neve",
@@ -19,7 +20,8 @@ const empresas = [
   "Expresso Biagini",
   "Famatur",
   "Fretadão",
-  "Gatti Gold Turismo",
+  "Gatti",
+  "Gold Turismo",
   "Gtz Turismo",
   "Jc Fretamento",
   "Karoline E Juliano Transportes",
@@ -47,7 +49,8 @@ const empresas = [
   "Rio Negro Turismo (Rn)",
   "Stelman Tour",
   "Sussantur",
-  "Tamboré Tel Turismo",
+  "Tamboré",
+  "Tel Turismo",
   "Tinga Turismo",
   "Transcolita Turismo",
   "Transguerra",
@@ -69,28 +72,18 @@ export default function MissaoPage() {
   const [area, setArea] = useState("");
   const [emailError, setEmailError] = useState(false);
 
-  const validarEmail = (email: string): boolean => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+  const validarEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
   const formValido =
-    nome.trim() !== "" && email.trim() !== "" && area.trim() !== "";
+    nome.trim() !== "" && email.trim() !== "" && !emailError && area !== "";
 
   return (
     <>
       <style>{`
         @keyframes color-loop {
-          0%, 100% { 
-          color: #ffffff;
-          transform: scale(1);
+          0%, 100% { color: #111111; transform: scale(1); }
+          50% { color: #eab308; transform: scale(1.06); }
         }
-        50% { 
-          color: #eab308;
-          transform: scale(1.06);
-          }
-        }
-
         .maio-title {
           animation: color-loop 2.5s ease-in-out infinite;
           font-size: clamp(2.5rem, 6vw, 4rem);
@@ -99,39 +92,13 @@ export default function MissaoPage() {
           text-align: center;
           margin: 0 0 48px 0;
         }
-
-        .missao-input {
-          width: 100%;
-          background-color: #1e1e1e;
-          border: 1.5px solid #2e2e2e;
-          border-radius: 10px;
-          padding: 14px 16px;
-          color: #ffffff;
-          font-size: 0.95rem;
-          outline: none;
-          transition: border-color 0.2s ease;
-          box-sizing: border-box;
-        }
-
-        .missao-input::placeholder {
-          color: #4b5563;
-        }
-
-        .missao-input:focus {
-          border-color: #22af9e;
-        }
-
-        .missao-input.error {
-          border-color: #ef4444;
-        }
-
         .missao-select {
           width: 100%;
-          background-color: #1e1e1e;
-          border: 1.5px solid #2e2e2e;
+          background-color: #ffffff;
+          border: 1.5px solid #4b5563;
           border-radius: 10px;
           padding: 14px 40px 14px 16px;
-          color: #ffffff;
+          color: #111111;
           font-size: 0.95rem;
           outline: none;
           transition: border-color 0.2s ease;
@@ -143,96 +110,18 @@ export default function MissaoPage() {
           background-repeat: no-repeat;
           background-position: right 14px center;
         }
-
-        .missao-select:focus {
-          border-color: #22af9e;
-        }
-
-        .missao-select option {
-          background-color: #1e1e1e;
-          color: #ffffff;
-        }
-
-        .missao-select option[value=""] {
-          color: #4b5563;
-        }
-
-        .missao-label {
-          color: #ffffff;
-          font-size: 0.65rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          display: block;
-          margin-bottom: 8px;
-        }
-
-        .btn-missao-submit {
-          width: 100%;
-          padding: 16px;
-          background-color: #22af9e;
-          color: #ffffff;
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          border: none;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: background-color 0.2s ease, opacity 0.2s ease;
-        }
-
-        .btn-missao-submit:hover:not(:disabled) {
-          background-color: #1a9080;
-        }
-
-        .btn-missao-submit:disabled {
-          opacity: 0.4;
-          cursor: not-allowed;
-        }
-
-        .voltar-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          color: #6b7280;
-          font-size: 0.85rem;
-          text-decoration: none;
-          transition: color 0.2s ease;
-          margin-bottom: 40px;
-        }
-
-        .voltar-link:hover {
-          color: #ffffff;
-        }
-
-        .error-msg {
-          color: #ef4444;
-          font-size: 0.78rem;
-          margin-top: 6px;
-          display: block;
-        }
+        .missao-select:focus { border-color: #22af9e; }
+        .missao-select option { background-color: #ffffff; color: #111111; }
       `}</style>
 
-      <main
-        style={{
-          backgroundColor: "#000000",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "64px 24px",
-        }}
-      >
+      <main className="min-h-screen flex flex-col items-center px-6 py-16 bg-[#f9fafb]">
         <h1 className="maio-title">Maio Amarelo</h1>
 
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "480px",
-          }}
-        >
-          <Link href="/" className="voltar-link">
+        <div className="w-full max-w-[480px] bg-white rounded-2xl border border-[#4b5563] shadow-sm p-8 md:p-10">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-gray-400 text-sm no-underline transition-colors hover:text-gray-700 mb-8"
+          >
             <svg
               width="16"
               height="16"
@@ -248,98 +137,84 @@ export default function MissaoPage() {
             Voltar
           </Link>
 
-          <span
-            style={{
-              color: "#eab308",
-              fontSize: "0.65rem",
-              fontWeight: 700,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              display: "block",
-              marginBottom: "12px",
-            }}
-          >
+          <span className="block text-[#eab308] text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-3">
             Identificação
           </span>
 
           <h2
-            style={{
-              color: "#ffffff",
-              fontSize: "clamp(1.6rem, 3vw, 2rem)",
-              fontWeight: 800,
-              lineHeight: 1.2,
-              margin: "0 0 8px 0",
-            }}
+            className="text-gray-900 font-extrabold leading-tight mb-2"
+            style={{ fontSize: "clamp(1.6rem, 3vw, 2rem)" }}
           >
             Quem está
             <br />
             atrás do volante?
           </h2>
 
-          <p
-            style={{
-              color: "#6b7280",
-              fontSize: "0.875rem",
-              margin: "0 0 32px 0",
-            }}
-          >
-            Seu nome e área entram no ranking interno Fretadão.
+          <p className="text-gray-500 text-sm mb-8">
+            Seu nome e empresa entram no ranking interno Fretadão.
           </p>
 
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-          >
+          <div className="flex flex-col gap-5">
             <div>
-              <label className="missao-label">Nome</label>
+              <label className="block text-gray-700 text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
+                Nome
+              </label>
               <input
                 type="text"
                 placeholder="Seu nome"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
-                className="missao-input"
+                className="w-full bg-white border border-[#4b5563] rounded-xl px-4 py-3.5 text-gray-900 text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e]"
               />
             </div>
 
             <div>
-              <label className="missao-label">E-mail</label>
+              <label className="block text-gray-700 text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
+                E-mail
+              </label>
               <input
                 type="email"
                 placeholder="voce@email.com.br"
                 value={email}
                 onChange={(e) => {
-                  const value = e.target.value;
-                  setEmail(value);
-                  setEmailError(!validarEmail(value));
+                  setEmail(e.target.value);
+                  setEmailError(!validarEmail(e.target.value));
                 }}
-                className={`missao-input ${emailError ? "error" : ""}`}
+                className={`w-full bg-white border rounded-xl px-4 py-3.5 text-gray-900 text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e] ${emailError ? "border-red-400" : "border-[#4b5563]"}`}
               />
-              {emailError && <span className="error-msg">E-mail inválido</span>}
+              {emailError && (
+                <span className="block text-red-500 text-xs mt-1.5">
+                  Digite um e-mail válido. Ex: nome@email.com
+                </span>
+              )}
             </div>
 
             <div>
-              <label className="missao-label">Empresa</label>
+              <label className="block text-gray-700 text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
+                Empresa
+              </label>
               <select
                 value={area}
                 onChange={(e) => setArea(e.target.value)}
                 className="missao-select"
               >
                 <option value="">Selecione sua empresa...</option>
-                {empresas.map((empresa) => (
-                  <option key={empresa} value={empresa}>
-                    {empresa}
+                {empresas.map((emp) => (
+                  <option key={emp} value={emp}>
+                    {emp}
                   </option>
                 ))}
               </select>
             </div>
 
             <button
-              className="btn-missao-submit"
               disabled={!formValido}
               onClick={() =>
                 router.push(
                   `/quiz?nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&area=${encodeURIComponent(area)}`,
                 )
               }
+              className="w-full py-4 bg-[#22af9e] text-white text-xs font-bold tracking-widest uppercase rounded-xl border-none cursor-pointer transition-all duration-200 hover:bg-[#1a9080] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Entrar na Missão →
             </button>
