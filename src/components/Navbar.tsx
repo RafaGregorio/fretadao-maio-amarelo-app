@@ -33,7 +33,7 @@ export default function Navbar() {
       style={{ top: visible ? 0 : "-90px" }}
       className="sticky z-50 w-full transition-all duration-300 bg-[var(--bg-primary)] border-b border-[var(--border)]"
     >
-      <div className="max-w-[1280px] mx-auto px-6 h-[72px] flex items-center justify-between gap-8">
+      <div className="max-w-[1440px] mx-auto px-6 h-[72px] flex items-center justify-between gap-8">
         <Link href="/" className="flex items-center shrink-0">
           <Image
             src="/logoBranca.png"

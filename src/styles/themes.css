@@ -1,11 +1,11 @@
 /* Tema escuro (padrão) */
 :root,
 [data-theme="dark"] {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #242424;
+  --bg-primary: #00245b;
+  --bg-secondary: #003080;
   --bg-hover: #2e2e2e;
-  --text-primary: #ffffff;
-  --text-muted: #9ca3af;
+  --text-primary: #9ca3af;
+  --text-muted: #ffffff;
   --text-faint: #6b7280;
   --border: #2a2a2a;
   --accent: #22af9e;
@@ -21,8 +21,8 @@
   --text-muted: #4b5563;
   --text-faint: #9ca3af;
   --border: #4b5563;
-  --accent: #eab308;
-  --accentH: #fde047;
+  --accent: #00245b;
+  --accentH: #003080;
 }
 
 body {

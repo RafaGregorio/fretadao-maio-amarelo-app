@@ -77,7 +77,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[var(--bg-primary)] pt-16 transition-colors duration-300">
-      <div className="max-w-[1280px] mx-auto px-6">
+      <div className="max-w-[1440px] mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
             <Link href="/" className="inline-flex mb-5 no-underline">
@@ -151,7 +151,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="h-px bg-[var(--border)]" />
+        <div className="h-px bg-[var(--border)] min-w-[1416px] mx-auto" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 pb-16 text-center">
           <span className="text-[var(--text-faint)] text-xs">

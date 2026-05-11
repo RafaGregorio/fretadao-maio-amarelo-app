@@ -17,7 +17,7 @@ export default function Hero() {
       <section className="relative w-full min-h-[80vh] md:min-h-screen flex items-center overflow-hidden bg-[#111111]">
         {/* Image */}
         <Image
-          src="/heroImage.png"
+          src="/fretadao_heroimage.png"
           alt="Motorista Fretadão"
           fill
           className="object-cover object-center"
@@ -29,14 +29,14 @@ export default function Hero() {
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "linear-gradient(to right, rgba(0,0,0,0.88) 60%, rgba(0,0,0,0.2) 100%)",
+              "linear-gradient(to right, rgba(0,0,0,0.83) 50%, rgba(0,0,0,0.2) 100%)",
           }}
         />
 
         {/* Conteúdo */}
-        <div className="relative z-[2] w-full max-w-[1280px] mx-auto px-6 py-16 md:py-20">
+        <div className="relative z-[2] w-full max-w-[1440px] mx-auto px-6 py-16 md:py-20">
           <h1
-            className="text-white font-extrabold leading-tight mb-6 transition-colors duration-300 cursor-default hover:text-[var(--accent)] max-w-[750px]"
+            className="text-white font-extrabold leading-tight mb-6 transition-colors duration-300 cursor-default hover:text-[var(--accentH)] max-w-[750px]"
             style={{ fontSize: "clamp(2rem, 5vw, 3.75rem)" }}
           >
             Dirigir é mais do que conduzir um veículo,{" "}
