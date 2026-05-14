@@ -33,13 +33,12 @@ src/
 │   ├── ranking/
 │   │   ├── page.tsx                    # Suspense wrapper
 │   │   └── RankingPage.tsx             # Top 5 geral + resultado do participante
-│   ├── podcast/
-│   │   └── page.tsx                    # Página com players de podcast e vídeo
+│                      # Página com players de podcast e vídeo
 │   └── categoria/
+|       ├── podcast/
+│       └── page.tsx                    # Página do Podcast
 │       ├── seguranca/
 │       │   └── page.tsx                # Dados de segurança no trânsito
-│       └── prevencao/
-│           └── page.tsx                # Dicas de prevenção + mensagem final
 │
 ├── components/
 │   ├── Navbar.tsx                      # Navbar responsiva com hide on scroll
@@ -69,8 +68,8 @@ public/
 ├── heroImage.png                       # Imagem de fundo do Hero
 ├── podcastHost.png                     # Imagem do host do podcast
 └── audio/
-    ├── episodio-01.mp3                 # Episódio 01 do podcast
-    └── episodio-02.mp3                 # Episódio 02 do podcast
+    ├── ep-01.mp3                       # Episódio 01 do podcast
+    └── ep-02.mp3                       # Episódio 02 do podcast
 ```
 
 ---
@@ -115,10 +114,6 @@ Exibe o resultado do participante (pontos e acertos) e o top 5 geral buscado da 
 
 Título animado com ícone de microfone. Múltiplos players usando o componente `PodcastPlayer` — barra de progresso clicável, play/pause, controle de volume. Suporte a embed de vídeo via iframe.
 
-### Segurança no Trânsito (`/categoria/seguranca`)
-
-Dados reais de março e abril de 2026: tipos de acidente, causas, horários, gravidade e ranking de operações. Barras de progresso animadas com IntersectionObserver.
-
 ### Prevenção de Acidentes (`/categoria/prevencao`)
 
 8 dicas práticas baseadas nos dados reais. Mensagem final com badge Maio Amarelo.
@@ -146,16 +141,6 @@ Variável de ambiente necessária:
 ```
 DATABASE_URL=postgresql://...
 ```
-
----
-
-## 🚧 Próximos Passos
-
-- [ ] Painel admin para gerenciamento de artigos e participantes
-- [ ] Página individual de artigo (`/artigo/[slug]`)
-- [ ] Página de Conscientização com dados
-- [ ] SEO — `next/og` para Open Graph dinâmico e `sitemap.xml`
-- [ ] Migração do quiz store em memória para persistência total no banco
 
 ---
 
