@@ -10,6 +10,7 @@ Blog institucional do Fretadão dedicado ao **Maio Amarelo 2026**, com foco em c
 - **TypeScript**
 - **Tailwind CSS**
 - **React** — com hooks e Client Components onde necessário
+- **Neon (PostgreSQL)** — banco de dados via `@neondatabase/serverless`
 - **Vercel** — deploy e hospedagem
 
 ---
@@ -19,38 +20,57 @@ Blog institucional do Fretadão dedicado ao **Maio Amarelo 2026**, com foco em c
 ```
 src/
 ├── app/
-│   ├── page.tsx                  # Home — Hero + Podcast + Footer
+│   ├── page.tsx                        # Home — Hero + PodcastSection + Footer
+│   ├── layout.tsx                      # Layout global com ThemeProvider
+│   ├── api/
+│   │   └── ranking/
+│   │       └── route.ts                # GET/POST — ranking de participantes
 │   ├── missao/
-│   │   └── page.tsx              # Página Missão Maio Amarelo (formulário)
+│   │   └── page.tsx                    # Formulário de identificação + validação
+│   ├── quiz/
+│   │   ├── page.tsx                    # Suspense wrapper
+│   │   └── QuizPage.tsx                # Quiz com cronômetro e pontuação
+│   ├── ranking/
+│   │   ├── page.tsx                    # Suspense wrapper
+│   │   └── RankingPage.tsx             # Top 5 geral + resultado do participante
 │   ├── podcast/
-│   │   └── page.tsx              # Página Podcast Na Pista
+│   │   └── page.tsx                    # Página com players de podcast e vídeo
 │   └── categoria/
 │       ├── seguranca/
-│       │   └── page.tsx          # Categoria: Segurança no Trânsito
-│       ├── prevencao/
-│       │   └── page.tsx          # Categoria: Prevenção de Acidentes
-│       └── conscientizacao/
-│           └── page.tsx          # Categoria: Conscientização
+│       │   └── page.tsx                # Dados de segurança no trânsito
+│       └── prevencao/
+│           └── page.tsx                # Dicas de prevenção + mensagem final
 │
 ├── components/
-│   ├── Navbar.tsx                # Barra de navegação com hide on scroll
-│   ├── Hero.tsx                  # Seção principal com imagem de fundo
-│   ├── PodcastSection.tsx        # Banner do Podcast Na Pista
-│   ├── Footer.tsx                # Rodapé com links e redes sociais
-│   ├── ThemeProvider.tsx         # Contexto de tema dark/light
-│   ├── ThemeToggle.tsx           # Botão de alternar tema
-│   └── ScrollToTop.tsx           # Botão flutuante de voltar ao topo
+│   ├── Navbar.tsx                      # Navbar responsiva com hide on scroll
+│   ├── Hero.tsx                        # Hero com imagem, fade e badge animado
+│   ├── PodcastSection.tsx              # Banner 25/75 com CTA para o podcast
+│   ├── PodcastPlayer.tsx               # Player de áudio reutilizável
+│   ├── Footer.tsx                      # Rodapé responsivo com redes sociais
+│   ├── ThemeProvider.tsx               # Contexto de tema dark/light
+│   ├── ThemeToggle.tsx                 # Botão de alternar tema
+│   └── ScrollToTop.tsx                 # Botão flutuante com scroll suave
 │
-├── styles/
-│   ├── globals.css               # Estilos globais
-│   └── themes.css                # Variáveis CSS de tema dark/light
+├── data/
+│   └── perguntas.ts                    # 10 perguntas do quiz
 │
-└── types/
-    └── video.d.ts                # Declaração de tipos para arquivos .mp4
+├── lib/
+│   └── db.ts                           # Conexão com Neon via serverless
+│
+├── store/
+│   └── quizStore.ts                    # Store em memória (legado, substituído pela API)
+│
+└── styles/
+    ├── input.css                       # Estilos globais + imports Tailwind
+    └── themes.css                      # Variáveis CSS de tema dark/light
 
 public/
-├── imagem_fretadao.png           # Imagem de fundo do Hero
-└── podcast_host.png              # Imagem do host do podcast
+├── logoBranca.png                      # Logo oficial Fretadão (branca)
+├── heroImage.png                       # Imagem de fundo do Hero
+├── podcastHost.png                     # Imagem do host do podcast
+└── audio/
+    ├── episodio-01.mp3                 # Episódio 01 do podcast
+    └── episodio-02.mp3                 # Episódio 02 do podcast
 ```
 
 ---
@@ -59,14 +79,15 @@ public/
 
 | Token            | Dark      | Light     |
 | ---------------- | --------- | --------- |
-| `--bg-primary`   | `#1a1a1a` | `#ffffff` |
-| `--bg-secondary` | `#242424` | `#f3f4f6` |
+| `--bg-primary`   | `#00245b` | `#f9fafb` |
+| `--bg-secondary` | `#003080` | `#f3f4f6` |
 | `--bg-hover`     | `#2e2e2e` | `#e5e7eb` |
-| `--text-primary` | `#ffffff` | `#111111` |
-| `--text-muted`   | `#9ca3af` | `#4b5563` |
+| `--text-primary` | `#9ca3af` | `#111111` |
+| `--text-muted`   | `#ffffff` | `#4b5563` |
 | `--text-faint`   | `#6b7280` | `#9ca3af` |
-| `--border`       | `#2a2a2a` | `#e5e7eb` |
-| `--accent`       | `#22af9e` | `#22af9e` |
+| `--border`       | `#2a2a2a` | `#4b5563` |
+| `--accent`       | `#22af9e` | `#00245b` |
+| `--accentH`      | `#1a9080` | `#003080` |
 
 O tema é salvo no `localStorage` e aplicado via atributo `data-theme` no `<html>`.
 
@@ -76,44 +97,71 @@ O tema é salvo no `localStorage` e aplicado via atributo `data-theme` no `<html
 
 ### Home (`/`)
 
-- **Navbar** com links de navegação, botão Missão Maio Amarelo e toggle de tema. Some ao rolar para baixo e reaparece ao rolar para cima.
-- **Hero** com imagem de fundo, título com hover colorido, badge piscando e botão para a missão.
-- **PodcastSection** com banner 25/75 — imagem do host à esquerda e CTA para o podcast à direita.
-- **Footer** com logo, descrição, categorias, links da empresa e redes sociais.
-- **ScrollToTop** — botão flutuante no canto inferior direito com animação suave.
+Hero com imagem de fundo, fade bottom, título animado no hover, badge piscando e botão para a missão. PodcastSection com banner clicável. Footer responsivo com logo, categorias, links e redes sociais.
 
 ### Missão Maio Amarelo (`/missao`)
 
-- H1 animado alternando entre branco e amarelo com efeito de zoom.
-- Formulário com 3 campos: Nome, E-mail e Área/Função.
-- Validação de e-mail: apenas `@fretadao.com.br` é aceito.
-- Botão "Entrar na Missão" desabilitado enquanto algum campo estiver vazio ou inválido.
+Fundo `#f9fafb`, H1 animado alternando entre preto e amarelo. Formulário com nome, e-mail (validação de formato) e select com todas as empresas parceiras. Botão desabilitado até todos os campos estarem preenchidos e válidos. Redireciona para o quiz via query params.
 
-### Categorias (`/categoria/seguranca`, `/categoria/prevencao`, `/categoria/conscientizacao`)
+### Quiz (`/quiz`)
 
-- Header com label, título, linha accent e descrição da categoria.
-- Estado vazio padrão — artigos serão gerenciados via painel admin (a implementar).
+10 perguntas com 30 segundos cada. Cronômetro circular que muda de verde → amarelo → vermelho. 500 pontos por acerto. Feedback imediato após cada resposta. Ao finalizar, salva o participante no banco via API e redireciona para o ranking.
 
-### Podcast Na Pista (`/podcast`)
+### Ranking (`/ranking`)
 
-- A implementar.
+Exibe o resultado do participante (pontos e acertos) e o top 5 geral buscado da API. Medalhas para os 3 primeiros. Botão para voltar à home.
+
+### Podcast (`/podcast`)
+
+Título animado com ícone de microfone. Múltiplos players usando o componente `PodcastPlayer` — barra de progresso clicável, play/pause, controle de volume. Suporte a embed de vídeo via iframe.
+
+### Segurança no Trânsito (`/categoria/seguranca`)
+
+Dados reais de março e abril de 2026: tipos de acidente, causas, horários, gravidade e ranking de operações. Barras de progresso animadas com IntersectionObserver.
+
+### Prevenção de Acidentes (`/categoria/prevencao`)
+
+8 dicas práticas baseadas nos dados reais. Mensagem final com badge Maio Amarelo.
+
+---
+
+## 🗄️ Banco de Dados
+
+**Neon (PostgreSQL)** via `@neondatabase/serverless`. Tabela `participantes` armazena nome, e-mail, empresa, pontos, acertos e data de cada participante do quiz.
+
+```sql
+CREATE TABLE participantes (
+  id SERIAL PRIMARY KEY,
+  nome TEXT NOT NULL,
+  email TEXT NOT NULL,
+  area TEXT NOT NULL,
+  pontos INTEGER NOT NULL,
+  acertos INTEGER NOT NULL,
+  data TEXT NOT NULL
+);
+```
+
+Variável de ambiente necessária:
+
+```
+DATABASE_URL=postgresql://...
+```
 
 ---
 
 ## 🚧 Próximos Passos
 
-- [ ] Painel admin para upload e gerenciamento de artigos
-- [ ] Integração de áudio real no Podcast Na Pista
+- [ ] Painel admin para gerenciamento de artigos e participantes
 - [ ] Página individual de artigo (`/artigo/[slug]`)
-- [ ] Página do Podcast (`/podcast`)
-- [ ] Banco de dados para armazenar artigos e dados do formulário da Missão
-- [ ] SEO — `next/og` para Open Graph dinâmico, `sitemap.xml` e RSS feed
+- [ ] Página de Conscientização com dados
+- [ ] SEO — `next/og` para Open Graph dinâmico e `sitemap.xml`
+- [ ] Migração do quiz store em memória para persistência total no banco
 
 ---
 
 ## 🌐 Deploy
 
-O projeto é hospedado na **Vercel** com deploy automático a partir da branch `main`.
+Hospedado na **Vercel** com deploy automático a partir da branch `main`. Variáveis de ambiente configuradas no painel da Vercel.
 
 ---
 
