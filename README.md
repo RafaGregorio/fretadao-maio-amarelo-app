@@ -128,11 +128,12 @@ Título animado com ícone de microfone. Múltiplos players usando o componente 
 CREATE TABLE participantes (
   id SERIAL PRIMARY KEY,
   nome TEXT NOT NULL,
-  email TEXT NOT NULL,
+  email TEXT UNIQUE,
   area TEXT NOT NULL,
   pontos INTEGER NOT NULL,
   acertos INTEGER NOT NULL,
-  data TEXT NOT NULL
+  data TEXT NOT NULL,
+  telefone TEXT
 );
 ```
 
