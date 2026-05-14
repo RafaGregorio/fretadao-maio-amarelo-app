@@ -34,18 +34,6 @@ export const perguntas: Pergunta[] = [
   {
     id: 3,
     texto:
-      "Dos 50 acidentes registrados pelo Fretadão em março e abril de 2026, qual foi o tipo de colisão mais frequente?",
-    alternativas: [
-      "Colisão traseira (14%)",
-      "Colisão lateral (36%)",
-      "Colisão frontal (6%)",
-      "Choque com objeto fixo (8%)",
-    ],
-    correta: 1,
-  },
-  {
-    id: 4,
-    texto:
       "Quais são os três pilares da direção defensiva que mais evitam acidentes?",
     alternativas: [
       "Conhecimento das leis, atenção constante e antecipação dos riscos",
@@ -56,19 +44,7 @@ export const perguntas: Pergunta[] = [
     correta: 0,
   },
   {
-    id: 5,
-    texto:
-      " Qual é a principal causa dos acidentes registrados na frota Fretadão entre março e abril de 2026?",
-    alternativas: [
-      "Problemas mecânicos nos veículos (4%)",
-      "Condições ruins da via (18%)",
-      "Fator humano: desatenção, imprudência e excesso de velocidade (74%)",
-      "Condições climáticas adversas",
-    ],
-    correta: 2,
-  },
-  {
-    id: 6,
+    id: 4,
     texto:
       "Em quais períodos do dia ocorreram mais acidentes na frota Fretadão?",
     alternativas: [
@@ -80,7 +56,7 @@ export const perguntas: Pergunta[] = [
     correta: 3,
   },
   {
-    id: 7,
+    id: 5,
     texto:
       "Dirigir com sono tem efeito similar a qual condição no organismo do motorista?",
     alternativas: [
@@ -92,7 +68,7 @@ export const perguntas: Pergunta[] = [
     correta: 0,
   },
   {
-    id: 8,
+    id: 6,
     texto:
       "Quando o outro motorista é o culpado pelo acidente, o que um motorista profissional deve fazer?",
     alternativas: [
@@ -104,7 +80,7 @@ export const perguntas: Pergunta[] = [
     correta: 1,
   },
   {
-    id: 9,
+    id: 7,
     texto:
       "92% das ocorrências não resultaram em vítimas. O que esse dado revela sobre a segurança no trânsito?",
     alternativas: [
@@ -116,7 +92,7 @@ export const perguntas: Pergunta[] = [
     correta: 1,
   },
   {
-    id: 10,
+    id: 8,
     texto:
       "No fretamento corporativo, além do motorista, quem mais tem papel ativo na segurança viária?",
     alternativas: [

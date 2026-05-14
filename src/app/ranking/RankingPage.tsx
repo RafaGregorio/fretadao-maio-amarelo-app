@@ -157,7 +157,7 @@ export default function RankingPage() {
                       lineHeight: 1,
                     }}
                   >
-                    {acertos}/10
+                    {acertos}/8
                   </div>
                   <div
                     style={{

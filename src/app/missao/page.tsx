@@ -227,15 +227,10 @@ export default function MissaoPage() {
                   `/quiz?nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&telefone=${encodeURIComponent(telefone)}&area=${encodeURIComponent(area)}`,
                 );
               }}
-              className="w-full py-4 bg-[--accent] text-white text-xs font-bold tracking-widest uppercase rounded-xl border-none cursor-pointer transition-all duration-200 hover:bg-[--accentH] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="mb-3 w-full py-4 bg-[--accent] text-white text-xs font-bold tracking-widest uppercase rounded-xl border-none cursor-pointer transition-all duration-200 hover:bg-[--accentH] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Entrar na Missão →
             </button>
-          </div>
-          <div className="flex flex-col items-center gap-4 mt-10">
-            <p className="text-[var(--text-faint)] text-xs font-bold tracking-widest uppercase">
-              Acesse pelo celular
-            </p>
           </div>
         </div>
       </main>
