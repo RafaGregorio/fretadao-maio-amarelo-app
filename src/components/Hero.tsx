@@ -54,6 +54,15 @@ export default function Hero() {
             garantem que todos cheguem em casa com segurança.
           </p>
 
+          <p
+            className="text-white/55 leading-relaxed max-w-[680px] mt-2"
+            style={{ fontSize: "clamp(0.95rem, 2vw, 1.125rem)" }}
+          >
+            <i style={{ color: "#EAB308" }}>
+              ´´No trânsito, enxergar o outro é salvar vidas´´
+            </i>
+          </p>
+
           <Link
             href="/missao"
             className="mt-9 inline-flex items-center gap-2 px-5 py-2.5 border border-[#eab308] rounded-full bg-[rgba(234,179,8,0.12)] text-[#eab308] text-xs font-bold tracking-widest uppercase no-underline transition-all duration-200 hover:bg-[rgba(234,179,8,0.28)] hover:text-[#fde047]"

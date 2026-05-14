@@ -173,9 +173,11 @@ export default function MissaoPage() {
             </div>
 
             <div>
-              <label className="...">
+              <label className="block text-[--text-muted] text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
                 E-mail ou Telefone{" "}
-                <span className="text-gray-400 normal-case">(opcional)</span>
+                <span className="text-[--text-muted] text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
+                  (opcional)
+                </span>
               </label>
               <input
                 type="text"
@@ -189,10 +191,10 @@ export default function MissaoPage() {
                     setContatoError(false);
                   }
                 }}
-                className={`w-full bg-white border rounded-xl px-4 py-3.5 text-gray-900 text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e] ${contatoError ? "border-red-400" : "border-[#4b5563]"}`}
+                className={`w-full bg-[--bg-primary] border rounded-xl px-4 py-3.5 text-[--text-primary] text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e] ${contatoError ? "border-red-400" : "border-[--border]"}`}
               />
               {contatoError && (
-                <span className="block text-red-500 text-xs mt-1.5">
+                <span className="block text-red-500 text-base mt-1.5">
                   Digite um e-mail ou telefone válido.
                 </span>
               )}
