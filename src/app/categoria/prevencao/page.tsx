@@ -7,7 +7,7 @@ const dicas = [
     num: "01",
     titulo: "DISTÂNCIA LATERAL SEMPRE",
     texto:
-      "A colisão lateral é a maior causa de acidentes (36%). Mantenha sempre distância segura dos veículos ao lado. Nunca dispute faixa. Se um veículo tentar se fechar, deixe passagem — sua segurança vale mais.",
+      "A colisão lateral é a maior causa de acidentes (36%). Mantenha sempre distância segura dos veículos ao lado. Nunca dispute faixa. Se um veículo tentar te fechar, deixe passagem — sua segurança vale mais.",
   },
   {
     num: "02",
@@ -138,7 +138,7 @@ export default function PrevencaoPage() {
               <div className="text-3xl sm:text-4xl md:text-[clamp(2rem,4vw,3rem)] font-black text-[#1a1a1a] leading-[1.1] tracking-[0.04em]">
                 MAIO AMARELO
               </div>
-              <div className="text-3xl sm:text-4xl md:text-[clamp(2rem,4vw,3rem)] font-black text-[#1a1a1a] leading-[1.1] tracking-[0.04em]">
+              <div className="mt-2 text-3xl sm:text-4xl md:text-[clamp(2rem,4vw,3rem)] font-black text-[#1a1a1a] leading-[1.1] tracking-[0.04em]">
                 VIDA NO TRÂNSITO
               </div>
             </div>

@@ -68,14 +68,18 @@ export default function MissaoPage() {
   const router = useRouter();
 
   const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
   const [area, setArea] = useState("");
-  const [emailError, setEmailError] = useState(false);
+  const [contato, setContato] = useState("");
+  const [contatoError, setContatoError] = useState(false);
 
-  const validarEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const isTelefone = (v: string) => /^[\d\s\(\)\-\+]{8,}$/.test(v);
+  const contatoValido = (v: string) => isEmail(v) || isTelefone(v);
 
   const formValido =
-    nome.trim() !== "" && email.trim() !== "" && !emailError && area !== "";
+    nome.trim() !== "" &&
+    area !== "" &&
+    (contato.trim() === "" || contatoValido(contato));
 
   return (
     <>
@@ -169,22 +173,27 @@ export default function MissaoPage() {
             </div>
 
             <div>
-              <label className="block text-[--text-muted] text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
-                E-mail
+              <label className="...">
+                E-mail ou Telefone{" "}
+                <span className="text-gray-400 normal-case">(opcional)</span>
               </label>
               <input
-                type="email"
-                placeholder="voce@email.com.br"
-                value={email}
+                type="text"
+                placeholder="voce@email.com ou (11) 99999-9999"
+                value={contato}
                 onChange={(e) => {
-                  setEmail(e.target.value);
-                  setEmailError(!validarEmail(e.target.value));
+                  setContato(e.target.value);
+                  if (e.target.value && !contatoValido(e.target.value)) {
+                    setContatoError(true);
+                  } else {
+                    setContatoError(false);
+                  }
                 }}
-                className={`w-full bg-[--bg-primary] border border-[--border] rounded-xl px-4 py-3.5 text-[--text-primary] text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e] ${emailError ? "border-red-400" : "border-[#4b5563]"}`}
+                className={`w-full bg-white border rounded-xl px-4 py-3.5 text-gray-900 text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e] ${contatoError ? "border-red-400" : "border-[#4b5563]"}`}
               />
-              {emailError && (
+              {contatoError && (
                 <span className="block text-red-500 text-xs mt-1.5">
-                  Digite um e-mail válido. Ex: nome@email.com
+                  Digite um e-mail ou telefone válido.
                 </span>
               )}
             </div>
@@ -209,11 +218,13 @@ export default function MissaoPage() {
 
             <button
               disabled={!formValido}
-              onClick={() =>
+              onClick={() => {
+                const email = isEmail(contato) ? contato : "";
+                const telefone = isTelefone(contato) ? contato : "";
                 router.push(
-                  `/quiz?nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&area=${encodeURIComponent(area)}`,
-                )
-              }
+                  `/quiz?nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&telefone=${encodeURIComponent(telefone)}&area=${encodeURIComponent(area)}`,
+                );
+              }}
               className="w-full py-4 bg-[--accent] text-white text-xs font-bold tracking-widest uppercase rounded-xl border-none cursor-pointer transition-all duration-200 hover:bg-[--accentH] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Entrar na Missão →

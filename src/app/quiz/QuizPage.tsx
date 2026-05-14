@@ -22,10 +22,17 @@ export default function QuizPage() {
   const [status, setStatus] = useState<
     "aguardando" | "correta" | "errada" | "tempo"
   >("aguardando");
+  const [bonusGanho, setBonusGanho] = useState(0);
 
   const pergunta = perguntas[atual];
   const progresso = (atual / perguntas.length) * 100;
   const circumference = 2 * Math.PI * 40;
+
+  const calcularBonus = (tempoRestante: number): number => {
+    if (tempoRestante >= 20) return 250;
+    if (tempoRestante >= 10) return 125;
+    return 60;
+  };
 
   const avancar = useCallback(
     async (pontosFinais: number, acertosFinais: number) => {
@@ -51,6 +58,7 @@ export default function QuizPage() {
         setTempo(TEMPO_POR_PERGUNTA);
         setRespondida(null);
         setStatus("aguardando");
+        setBonusGanho(0);
       }
     },
     [atual, nome, email, area, router],
@@ -75,12 +83,14 @@ export default function QuizPage() {
     const novoStatus = correta ? "correta" : "errada";
     setStatus(novoStatus);
 
-    const novosPontos = correta ? pontos + PONTOS_POR_ACERTO : pontos;
+    const bonus = correta ? calcularBonus(tempo) : 0;
+    const novosPontos = correta ? pontos + PONTOS_POR_ACERTO + bonus : pontos;
     const novosAcertos = correta ? acertos + 1 : acertos;
 
     if (correta) {
       setPontos(novosPontos);
       setAcertos(novosAcertos);
+      setBonusGanho(bonus);
     }
 
     setTimeout(() => avancar(novosPontos, novosAcertos), 1800);
@@ -195,6 +205,7 @@ export default function QuizPage() {
             </div>
           </div>
 
+          {/* Cronômetro circular */}
           <div
             style={{
               display: "flex",
@@ -266,6 +277,7 @@ export default function QuizPage() {
             </div>
           </div>
 
+          {/* Pergunta */}
           <h2
             style={{
               color: "var(--text-primary)",
@@ -279,6 +291,7 @@ export default function QuizPage() {
             {pergunta.texto}
           </h2>
 
+          {/* Alternativas */}
           <div
             style={{ display: "flex", flexDirection: "column", gap: "12px" }}
           >
@@ -299,6 +312,7 @@ export default function QuizPage() {
             ))}
           </div>
 
+          {/* Feedback */}
           {status !== "aguardando" && (
             <div
               style={{
@@ -316,7 +330,16 @@ export default function QuizPage() {
                 fontSize: "0.9rem",
               }}
             >
-              {status === "correta" && "✅ Correto! +500 pontos"}
+              {status === "correta" && (
+                <>
+                  ✅ Correto! +{PONTOS_POR_ACERTO} pontos
+                  {bonusGanho > 0 && (
+                    <span style={{ marginLeft: "8px", color: "#eab308" }}>
+                      +{bonusGanho} bônus de velocidade ⚡
+                    </span>
+                  )}
+                </>
+              )}
               {status === "errada" && "❌ Errado! Nenhum ponto"}
               {status === "tempo" && "⏰ Tempo esgotado! Nenhum ponto"}
             </div>

@@ -11,12 +11,12 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { nome, email, area, pontos, acertos } = await req.json();
+  const { nome, email, telefone, area, pontos, acertos } = await req.json();
   const data = new Date().toISOString().split("T")[0];
 
   await sql`
-    INSERT INTO participantes (nome, email, area, pontos, acertos, data)
-    VALUES (${nome}, ${email}, ${area}, ${pontos}, ${acertos}, ${data})
+    INSERT INTO participantes (nome, email, telefone, area, pontos, acertos, data)
+    VALUES (${nome}, ${email || null}, ${telefone || null}, ${area}, ${pontos}, ${acertos}, ${data})
   `;
 
   return NextResponse.json({ ok: true });

@@ -84,11 +84,14 @@ export default function PodcastPage() {
             </p>
             <iframe
               className="w-full aspect-video rounded-2xl border border-[var(--border)]"
-              src="https://www.youtube.com/embed/_ID"
+              src="https://www.youtube.com/embed/JfkQNn1ty3M"
               allowFullScreen
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             />
           </div>
+          <span className="text-[var(--text-muted)] text-xs mt-2 block">
+            FONTE: ONSV.ORG
+          </span>
         </div>
       </main>
 
