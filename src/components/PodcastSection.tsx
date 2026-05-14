@@ -24,7 +24,7 @@ export default function PodcastSection() {
               className="text-white font-extrabold leading-tight"
               style={{ fontSize: "clamp(1.4rem, 3vw, 2.25rem)" }}
             >
-              Ouça agora o podcast de hoje
+              Ouça agora nossos podcasts
             </span>
 
             <span className="mt-2 inline-flex items-center gap-2 text-white text-xs font-bold tracking-widest uppercase border-b border-white/50 pb-0.5 w-fit transition-transform duration-200 group-hover:translate-x-1">

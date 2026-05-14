@@ -94,7 +94,7 @@ export default function PrevencaoPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[2px]">
               {dicas.map((d) => (
                 <div key={d.num} className="dica-card p-6 sm:p-8">
-                  <div className="text-5xl sm:text-6xl font-black text-[var(--border)] leading-none mb-1">
+                  <div className="text-5xl sm:text-6xl font-black text-[var(--text-muted)] leading-none mb-1">
                     {d.num}
                   </div>
                   <div className="text-[0.8rem] sm:text-[0.85rem] font-extrabold tracking-[0.06em] text-[var(--accent)] uppercase mb-3">
@@ -112,7 +112,7 @@ export default function PrevencaoPage() {
             <span className="block text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[var(--accent)] mb-3">
               Mensagem Final
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-primary)] leading-[1.1] mb-8 sm:mb-10">
+            <h2 className="text-3xl sm:text-4xl md:text-[clamp(1.8rem,4vw,3rem)] font-black text-[var(--text-muted)] leading-[1.1] mb-8 sm:mb-10">
               VOCÊ{" "}
               <em className="text-[var(--accent)] not-italic">
                 FAZ A DIFERENÇA

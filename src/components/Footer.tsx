@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 
 const categorias = [
-  { label: "Segurança no Trânsito", href: "/categoria/seguranca" },
   { label: "Prevenção de Acidentes", href: "/categoria/prevencao" },
   { label: "Fretadão Podcast", href: "/categoria/podcast" },
   { label: "Missão Maio Amarelo", href: "/missao" },
@@ -151,7 +150,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="h-px bg-[var(--border)] min-w-[1280px] mx-auto" />
+        <div className="h-px bg-[var(--border)] max-w-[1440px] mx-auto" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 pb-16 text-center">
           <span className="text-[var(--text-faint)] text-xs">

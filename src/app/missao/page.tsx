@@ -94,11 +94,11 @@ export default function MissaoPage() {
         }
         .missao-select {
           width: 100%;
-          background-color: #ffffff;
-          border: 1.5px solid #4b5563;
+          background-color: var(--bg-primary);
+          border: 1.5px solid var(--border);
           border-radius: 10px;
           padding: 14px 40px 14px 16px;
-          color: #111111;
+          color: -var(-text-primary);
           font-size: 0.95rem;
           outline: none;
           transition: border-color 0.2s ease;
@@ -111,13 +111,13 @@ export default function MissaoPage() {
           background-position: right 14px center;
         }
         .missao-select:focus { border-color: #22af9e; }
-        .missao-select option { background-color: #ffffff; color: #111111; }
+        .missao-select option { background-color: var(--bg-primary); color: var( --text-primary); }
       `}</style>
 
-      <main className="min-h-screen flex flex-col items-center px-6 py-16 bg-[#f9fafb]">
+      <main className="min-h-screen flex flex-col items-center px-6 py-16 bg-[--bg-primary]">
         <h1 className="maio-title">Maio Amarelo</h1>
 
-        <div className="w-full max-w-[480px] bg-white rounded-2xl border border-[#4b5563] shadow-sm p-8 md:p-10">
+        <div className="w-full max-w-[480px] bg-[--bg-secondary] rounded-2xl border border-[#4b5563] shadow-sm p-8 md:p-10">
           <Link
             href="/"
             className="inline-flex items-center gap-1.5 text-gray-400 text-sm no-underline transition-colors hover:text-gray-700 mb-8"
@@ -142,7 +142,7 @@ export default function MissaoPage() {
           </span>
 
           <h2
-            className="text-gray-900 font-extrabold leading-tight mb-2"
+            className="text-[--text-primary] font-extrabold leading-tight mb-2"
             style={{ fontSize: "clamp(1.6rem, 3vw, 2rem)" }}
           >
             Quem está
@@ -150,13 +150,13 @@ export default function MissaoPage() {
             atrás do volante?
           </h2>
 
-          <p className="text-gray-500 text-sm mb-8">
+          <p className="text-[--text-primary] text-sm mb-8">
             Seu nome e empresa entram no ranking interno Fretadão.
           </p>
 
           <div className="flex flex-col gap-5">
             <div>
-              <label className="block text-gray-700 text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
+              <label className="block text-[--text-muted] text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
                 Nome
               </label>
               <input
@@ -164,12 +164,12 @@ export default function MissaoPage() {
                 placeholder="Seu nome"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
-                className="w-full bg-white border border-[#4b5563] rounded-xl px-4 py-3.5 text-gray-900 text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e]"
+                className="w-full bg-[--bg-primary] border border-[--border] rounded-xl px-4 py-3.5 text-[--text-primary] text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e]"
               />
             </div>
 
             <div>
-              <label className="block text-gray-700 text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
+              <label className="block text-[--text-muted] text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
                 E-mail
               </label>
               <input
@@ -180,7 +180,7 @@ export default function MissaoPage() {
                   setEmail(e.target.value);
                   setEmailError(!validarEmail(e.target.value));
                 }}
-                className={`w-full bg-white border rounded-xl px-4 py-3.5 text-gray-900 text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e] ${emailError ? "border-red-400" : "border-[#4b5563]"}`}
+                className={`w-full bg-[--bg-primary] border border-[--border] rounded-xl px-4 py-3.5 text-[--text-primary] text-[0.95rem] outline-none transition-colors placeholder:text-gray-400 focus:border-[#22af9e] ${emailError ? "border-red-400" : "border-[#4b5563]"}`}
               />
               {emailError && (
                 <span className="block text-red-500 text-xs mt-1.5">
@@ -190,7 +190,7 @@ export default function MissaoPage() {
             </div>
 
             <div>
-              <label className="block text-gray-700 text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
+              <label className="block text-[--text-muted] text-[0.65rem] font-bold tracking-[0.12em] uppercase mb-2">
                 Empresa
               </label>
               <select
@@ -214,10 +214,15 @@ export default function MissaoPage() {
                   `/quiz?nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&area=${encodeURIComponent(area)}`,
                 )
               }
-              className="w-full py-4 bg-[#22af9e] text-white text-xs font-bold tracking-widest uppercase rounded-xl border-none cursor-pointer transition-all duration-200 hover:bg-[#1a9080] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-full py-4 bg-[--accent] text-white text-xs font-bold tracking-widest uppercase rounded-xl border-none cursor-pointer transition-all duration-200 hover:bg-[--accentH] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Entrar na Missão →
             </button>
+          </div>
+          <div className="flex flex-col items-center gap-4 mt-10">
+            <p className="text-[var(--text-faint)] text-xs font-bold tracking-widest uppercase">
+              Acesse pelo celular
+            </p>
           </div>
         </div>
       </main>

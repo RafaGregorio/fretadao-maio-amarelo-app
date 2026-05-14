@@ -7,7 +7,6 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
-  { label: "Nossas Ocorrências", href: "/categoria/seguranca" },
   { label: "Prevenção de Acidentes", href: "/categoria/prevencao" },
   { label: "Fretadão Podcast", href: "/categoria/podcast" },
 ];
